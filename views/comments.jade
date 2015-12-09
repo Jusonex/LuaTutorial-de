@@ -1,0 +1,27 @@
+h1#comments Kommentare
+p.
+  Kommentare sind kurze Texte, die im Quellcode an (fast) beliebigen Stellen eingefügt werden können. Das Ziel von Kommentaren ist die schwierigere Codeteile zu erklären.
+  Gerade wenn im Team gearbeitet wird, ist es sehr wichtig den Code ausreichend gut zu kommentieren
+  <br/><br/>
+  In diesem Tutorial werden Kommentare benutzt, um Einzelschritte zu beschreiben
+
+h3 Einzeilige Kommentare
+p.
+  Einzeilige Kommentare gehen, wie sich leicht raten lässt, nur über eine Zeile. Dabei wird einfach nur ein 2 Bindestriche vor den Text gestellt <code>--</code>.
+  Zu beachten ist jedoch, dass Kommentare ab den Bindestrichen für die <strong>ganze</strong> Zeile gelten.
+
++executor('Einzeilige Kommentare', '\
+-- Hello world! ausgeben \n\
+print("Hello world") -- auch hier kann ein Kommentar stehen\
+')
+
+h3 Mehrzeilige Kommentare
+p.
+  Mehrzeilige Kommentare verhalten sich genauso wie einzeilige, können jedoch über mehrere Zeilen gehen und genutzt werden, um den Kommentar frühzeitig enden zu lassen
+
++executor('Mehrzeilige Kommentare','\
+--[[ \n\
+Im Folgenden wird der Text "Hello World" auf der Konsole ausgegeben \n\
+]] \n\
+print("Hello world" --[[auf diese Weise kann sogar hier ein Kommentar eingefügt werden]]) \n\
+')

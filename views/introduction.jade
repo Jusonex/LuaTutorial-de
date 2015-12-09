@@ -1,0 +1,31 @@
+block body
+  h1#introduction Einleitung
+  p.
+    Hallo,
+    dieses Tutorial soll die Skriptsprache von verschiedenen Seiten beleuchten.
+    
+  h3 Zielgruppe
+  p.
+    Die Zielgruppe dieses Tutorials sind sowohl blutige Anfänger als auch fortgeschrittene Leute, die bereits Erfahrung mit Lua haben und Hilfe zu fortgeschrittenen Themen
+    wie Objektorientierung in Lua, Metatables u.ä. suchen.
+    
+  h3 Quellen
+  ul
+    li: a(href="https://de.wikipedia.org/wiki/Lua") https://de.wikipedia.org/wiki/Lua
+  
+  h3 Was ist Lua?
+  p.
+    Lua (portugiesisch für <i>Mond</i>) ist eine Skriptsprache, die 1993 von der <i>Computer Graphics Technology Group</i> der Päpstlichen Katholischen Unversität von Rio de Janeiro in Brasilien entwickelt wurde.
+    <br/><br/>
+    Sie zeichnet sich insbesondere dudurch aus, dass sie sich sehr leicht einbetten lässt und bei den Sprachfeatures auf das wesentliche beschränkt.
+    Dadurch ist sie insbesondere für Programmieranfänger leicht zu erlernen.
+    
+  h3 Was zeichnet dieses Tutorial aus?
+  p.
+    Das besondere an diesem Tutorial ist, dass nicht nur gelesen wird, sondern der Leser selbst an verschiedenen Stellen Codeschnipsel im Browser ausprobieren kann.
+    Verwendet wird dazu eine reine Browserimplentierung (<a href="https://github.com/kripken/lua.vm.js">Klick mich</a>)
+
+  script.
+    $(document).ready(function() {
+      console.log(L);
+    });
