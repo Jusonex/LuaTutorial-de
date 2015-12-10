@@ -4,41 +4,9 @@ p.
   Das wollen wir natürlich hier nicht verletzen!
 
 div.executor
-  div
-    a: span.glyphicon.glyphicon-play
-    span HelloWorld.lua
-  pre.input.
+  label Hello World
+  pre.
     for i = 0, 10 do
       print("Hello world")
     end
-  span Ausgabe:
-  pre.output.
-    None yet
     
-script.
-  var currentOutput = null;
-
-  var Module = {
-    print: function(output) {
-      if (currentOutput != null)
-        $(currentOutput).html($(currentOutput).html() + output + '\n');
-      else
-        console.log(output);
-    }
-  };
-
-  $('.executor div a').click(function(e) {
-    var executor = $(e.currentTarget).parent().parent();
-    var input = executor.find('.input');
-    var output = executor.find('.output');
-    var code = $(input).html();
-    currentOutput = output;
-    output.html('');
-    
-    try {
-      L.execute(code);
-    }
-    catch (e) {
-      $(output).html(e.toString());
-    }
-  });

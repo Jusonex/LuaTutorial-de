@@ -10,18 +10,12 @@ p.
   Einzeilige Kommentare gehen, wie sich leicht raten lässt, nur über eine Zeile. Dabei wird einfach nur ein 2 Bindestriche vor den Text gestellt <code>--</code>.
   Zu beachten ist jedoch, dass Kommentare ab den Bindestrichen für die <strong>ganze</strong> Zeile gelten.
 
-+executor('Einzeilige Kommentare', '\
--- Hello world! ausgeben \n\
-print("Hello world") -- auch hier kann ein Kommentar stehen\
-')
+div.executor
+  label Einzeilige Kommentare
+  pre.
+    -- Hello world! ausgeben
+    print("Hello world") -- auch hier kann ein Kommentar stehen
 
 h3 Mehrzeilige Kommentare
 p.
   Mehrzeilige Kommentare verhalten sich genauso wie einzeilige, können jedoch über mehrere Zeilen gehen und genutzt werden, um den Kommentar frühzeitig enden zu lassen
-
-+executor('Mehrzeilige Kommentare','\
---[[ \n\
-Im Folgenden wird der Text "Hello World" auf der Konsole ausgegeben \n\
-]] \n\
-print("Hello world" --[[auf diese Weise kann sogar hier ein Kommentar eingefügt werden]]) \n\
-')
