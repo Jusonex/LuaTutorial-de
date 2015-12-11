@@ -3,27 +3,40 @@ h3 Variablen
 p.
   Variablen sollten für die meisten schon aus der Mathematik bekannt sein. In der Programmierung lässt sich ein Variable als Platzhalter für einen bestimmten Inhalt sehen.
   <br/>
-  So lässt sich sagen: Eine Variable ordnet einem <strong>Wert</strong> einen Namen zu.
+  So lässt sich sagen: Eine Variable ordnet einem <strong>Wert</strong> einen <strong>Namen</strong> zu.
 
 h3 Literale
 p.
   Literale sind feste Werte, die direkt - so wie sie sind - im Code stehen.
-  <pre>print(4)
-  print("Hi")</pre>
-  Sowohl <code>4</code> als auch <code>"Hi"</code> sind hier Literale.
+  
+div.executor
+  label Literale
+  pre.
+    print(4)
+    print("Hi")
+p Sowohl <code>4</code> als auch <code>"Hi"</code> sind hier Literale.
 
 h3 Datentypen
 p.
   Im Gegensatz zu anderen Programmiersprachen/Skriptsprachen ist Lua <i>dynamisch typisiert</i>. Das bedeutet, dass eine Variable jeden beliebigen Typ annehmen und diesen wechseln kann.
   Das macht Lua gerade auch für Anfänger besonders attraktiv, da es dadurch besonders einfach wird.
-  <br/><br/>
-  Beim Schreiben von Lua Code muss man lediglich die Syntax von der Defintion von Literalen kennen
+  <br/>
+  Beim Schreiben von Lua Code muss lediglich die Syntax der Defintion von Literalen bekannt sein.
 
 h4 Zahlen
 p.
-  Lua benutzt für alle Zahlen sogenannte <i>Fließkommazahlen doppelter Genauigkeit</i>.
+  Lua benutzt für alle Zahlen sogenannte <i>Fließkommazahlen doppelter Genauigkeit</i>, d.h. du musst dir keine Sorgen über zu kleine Wertebereiche machen (das bedeutet jedoch nicht,
+  dass eine Zahl beliebig groß sein kann). Dezimalzahlen mit einem Komma müssen statt eines Dezimalkommas jedoch einen Dezimalpunkt verwenden
+  
   Zahlen können ganz einfach definiert werden:
-  <pre>meineZahl = 42</pre>
+  
+div.executor
+  label Variablen: Zahlen
+  pre.
+   meineZahl = 42
+   print(meineZahl)
+   meineAndereZahl = 13.37 -- Dezimalzahl mit Dezimalpunkt
+p An diesem Beispiel lässt sich sehen, wie eine Variable als Platzhalter eingesetzt werden kann.
 
 h4 Strings / Zeichenketten
 p.
@@ -33,7 +46,32 @@ p.
   <pre>meineZeichenkette = 'Hallo Welt!'</pre>
   Beide Varianten sind in Lua gleichwertig (in anderen Sprachen wie z.B. PHP oder C++ ist das anders!)
 
+h4 Booleans
+p Boolische Werte repräsentieren die Wahrheitswerte. Entweder ist etwas wahr, dann ist es <code>true</code> oder nicht wahr, dann ist es <code>false</code>
+
+div.executor
+  label Variablen: Booleans
+  pre.
+    a = true
+    b = false
+    
+h4 Nil
+p <code>nil</code> ist <i>nichts</i>, d.h. der Wert, den Variablen haben, wenn sie nicht definiert sind. 
+
 h4 Tables
 p.
   Tables (deutsch: Tabellen) sind definitiv Luas mächtigster Datentyp. Tables werden jedoch erst zu einem späteren Zeitpunkt behandelt.
-  // TODO: Ref einfügen
+// TODO: Ref einfügen
+
+h3 Variablennamen
+p Damit der Lua <i>Interpreter</i> (das Programm, das den Lua Code ausführt) Variablen auch als solche identifizieren kann, muss man sich an bestimmte Regeln halten.
+
+p Der Name darf...
+  ul
+    li ...nur aus ASCII Zeichen bestehen (d.h. Sonderzeichen und Umlaute sind <strong>nicht</strong> erlaubt)
+    li ...nicht mit einer Zahl anfangen (muss also mit einem Buchstaben anfangen)
+
+p.
+  Des Weiteren ist es sinnvoll sich an bestimmte Namenskonventionen zu halten, damit der Code auch von anderen Entwicklern möglichst schnell verstanden werden kann.
+  Der wichtigste Punkt ist, dass du deinen Variablen eindeutige und selbsterklärende Namen geben solltest. Weiterhin solltest du überlegen, ob sich später vielleicht Leute aus dem
+  internationalen Raum anschließen und dann typischerweise mit englischen Namen arbeiten.

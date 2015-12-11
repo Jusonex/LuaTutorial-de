@@ -1,13 +1,13 @@
 h1#comments Kommentare
 p.
-  Kommentare sind kurze Texte, die im Quellcode an (fast) beliebigen Stellen eingefügt werden können. Das Ziel von Kommentaren ist die schwierigere Codeteile zu erklären.
+  Kommentare sind kurze Texte, die im Quellcode an (fast) beliebigen Stellen eingefügt werden können. Das Ziel von Kommentaren ist schwierigere Codeteile zu erklären.
   Gerade wenn im Team gearbeitet wird, ist es sehr wichtig den Code ausreichend gut zu kommentieren
   <br/><br/>
-  In diesem Tutorial werden Kommentare benutzt, um Einzelschritte zu beschreiben
+  In diesem Tutorial werden daher viele Kommentare benutzt, um Einzelschritte zu beschreiben.
 
 h3 Einzeilige Kommentare
 p.
-  Einzeilige Kommentare gehen, wie sich leicht raten lässt, nur über eine Zeile. Dabei wird einfach nur ein 2 Bindestriche vor den Text gestellt <code>--</code>.
+  Einzeilige Kommentare gehen, wie sich leicht raten lässt, nur über eine Zeile. Dabei wird einfach nur ein 2 (<code>--</code>) Bindestriche vor den Text gestellt.
   Zu beachten ist jedoch, dass Kommentare ab den Bindestrichen für die <strong>ganze</strong> Zeile gelten.
 
 div.executor
@@ -15,7 +15,25 @@ div.executor
   pre.
     -- Hello world! ausgeben
     print("Hello world") -- auch hier kann ein Kommentar stehen
+    
+p In diesem Codebeispiel wird deutlich, dass die Ausgabe identisch zur Ausgabe aus dem Hello-World Skript ist.
 
 h3 Mehrzeilige Kommentare
 p.
-  Mehrzeilige Kommentare verhalten sich genauso wie einzeilige, können jedoch über mehrere Zeilen gehen und genutzt werden, um den Kommentar frühzeitig enden zu lassen
+  Mehrzeilige Kommentare können mehrere Zeilen umfassen und genutzt werden, um einen Kommentar frühzeitig zu abzuschließen.
+  
+div.executor
+  label Mehrzeilige Kommentare
+  pre.
+    --[[
+      Hallo Welt,
+      dies ist ein mehrzeiliger Kommentar.
+      ...und noch eine Zeile
+    ]]
+    
+    print("Hallo, über mir ist ein mehrzeiliger Kommentar" --[[der zweite Anwendungszweck]])
+
+p.
+  An dieser Stelle ist zu sehen, wie sehr <i>Syntax Highlighting</i> (farbige Markierung des Quelltextes) zur Übersicht des Codes beitragen kann.
+  Daher empfielt es sich in jedem Fall einen guten Editor zum Programmieren zu benutzen.
+// TODO: Verweis@Sektion: Tools

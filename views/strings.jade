@@ -1,0 +1,41 @@
+h1#strings Mehr zu Strings
+p.
+  In diesem Abschnitt sollen Strings noch einmal näher beleuchtet werden.<br/>
+  Zur Wiederholung: Ein String oder eine Zeichenkette ist eine beliebige Aneinanderreihung von Symbolen und
+  müssen stets in Anführungszeichen angegeben werden.
+
+h3 Vereinigung von Strings / Konkatenation
+p.
+  Natürlich lassen sich mehrere Strings auch zu einem gesamten String vereinigen. Dies wird auch <strong>Konkatenation</strong> genannt.
+  Ob es sich dabei um einen String oder ein Stringliteral handelt, spielt keine Rolle. Die Konkatenation lässt sich mithilfe des <code>..</code>-Operators durchführen:
+  
+div.executor
+  label Konkatentation
+  pre.
+    -- Strings als Variablen definieren
+    local string1 = "Meine Name ist: "
+    local string2 = "Fritz"
+    
+    -- Konkatenation ausführen
+    local string3 = string1..string2
+    print(string3)
+    
+    -- Konkatentation mit Stringliteral
+    local string4 = string1.."Chantal"
+    print(string4)
+
+h3 Die String Bibliothek
+p.
+  Darüber hinaus ist es oft wünschenswert Strings nicht nur aneinander zu reihen oder zu definieren, sondern auch z.B. die Länge von Strings zu ermitteln oder einen Teilstring zu bekommen.
+  Hier stichprobenartig ein paar Ausschnitte:
+  
+h4 string.sub
+p Mit <code>string.sub(meinString, startPosition, endPosition)</code> lässt sich ein Teilstring ermitteln:
+
+div.executor
+  label Teilstrings mit string.sub
+  pre.
+    local myString = "Hallo Welt"
+    
+    -- Nur ersten Teil ausgeben
+    print(string.sub(myString, 0, 5))

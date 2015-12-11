@@ -1,0 +1,120 @@
+h1#controlstructs Kontrollstrukturen
+h3 Motivation
+p.
+  Bisher haben wir nur Variablen definiert und auf der Konsole ausgegeben. Damit lässt sich natürlich noch nicht viel machen; vor allem, weil wir nicht in der Lage sind
+  zwischen Sachen zu unterscheiden oder Sachen zu wiederholen.
+  
+h3 if-Bedingung
+p.
+  Jeder, der schonmal etwas mit Programmierung zu tun hatte kennt sie: Die if-Bedingung.
+  Mit der if-Bedingung/-Verzweigung lässt ein bestimmter Codeteil ausführen, wenn eine Bedingung wahr (oder nicht wahr) ist.
+  
+  So kann mit if-Bedingungen z.B. geprüft werden, ob eine vorher definierte Variable einen bestimmten Wert hat und wenn dies der Fall ist, wird etwas auf der Konsole ausgegeben:
+  
+div.executor
+  label if-Bedingung
+  pre.
+    -- Irgendwas definieren
+    irgendwas = 5
+    
+    -- Jetzt mit der if-Bedingung prüfen, ob irgendwas den Wert 5 hat
+    if irgendwas == 5 then
+      print("Die Variable irgendwas hat den Wert 5")
+    end
+
+    -- Eine andere Bedingung, die womöglich? nicht wahr ist
+    if irgendwas == 42 then
+      print("Die Variable hat den Wert 42")
+    end
+    
+    -- Natürlich muss man die Variable nicht mit einem Literal vergleichen,
+    -- sondern kann sie auch mit einer anderen Variablen vergleichen
+    andereVariable = irgendwas -- Wert von 'irgendwas' der Variable 'andereVariable' zuweisen
+    
+    if andereVariable == irgendwas then
+      print("irgendwas und andereVariable haben denselben Wert!")
+    end
+
+p.
+  Wie hoffentlich durch das Beispiel klar geworden ist, steht zwischen dem <code>if</code> und dem <code>then</code> die Bedingung und zwischen dem <code>then</code> und dem <code>end</code>
+  der Code, der ausgeführt wird, wenn die Bedingung wahr (<code>= true</code>) ist.
+
+div.alert.alert-warning Bei Vergleichen muss <strong>immer</strong> der <code>==</code>-Operator verwendet werden. Ein einzelnes Gleichheitszeichen <code>=</code> wird <strong>nur</strong> bei Zuweisungen verwendet!
+
+// TODO: Tabelle zu Vergleichsoperatoren
+
+h3 if-else
+p Für if gibt es noch eine kleine Erweiterung: Den else-Block. Dieser Block wird ausgeführt, wenn die Bedingung zwischen <code>if</code> und <code>then</code> <strong>nicht</strong> nicht wahr ist.
+
+div.executor
+  label if-else
+  pre.
+    irgendwas = 1337
+    
+    if irgendwas == 42 then
+      print("irgendwas riecht nach dem Sinn des Lebens")
+    else
+      print("Nein, Leetspeak ist besser")
+    end
+
+h3 while-Schleife
+p.
+  Die wohl wichtigste, aber nicht am meisten verwendet Schleife ist die <i>while</i>-Schleife. Sie führt einen Codeteil (= Block) so lange aus wie eine Bedingung wahr ist.
+
+div.executor
+  label while-Schleife
+  pre.
+    -- Zähler definieren
+    meinZaehler = 1
+    
+    -- Schleife so lange ausführen wie der Zähler kleiner als 5 ist
+    while meinZaehler ~= 5 do
+      -- Zähler ausgeben
+      print(meinZaehler)
+      
+      -- Zähler erhöhen (= inkrementieren)
+      meinZaehler = meinZaehler + 1
+    end
+
+div.alert.alert-warning Achte immer darauf, dass eine Bedingung auch eintritt, ansonsten verharrt das Skript in einer sog. Endlosschleife und kommt (theoretisch) nie zum Ende.
+p.
+  Mit einer while-Schleife lassen sich alle anderen Schleifentypen nachbauen, jedoch erlauben andere Schleifentypen in vielen Fällen eine kürzere und elegantere Lösung.
+
+h3 repeat-until-Schleife
+p.
+  Die <i>repeat-until</i>-Schleife verhält sich insgesamt recht ähnlich zur normalen <i>while</i>-Schleife, weist jedoch den Unterschied auf, dass der Schleifenrumpf (Code in der Schleife)
+  einmal ausgeführt wird, bevor die Bedingung überprüft wird und die Schleife erst abgebrochen wird, wenn die Bedingung wahr wird.
+  
+div.executor
+  label do-while-Schleife (Zähler aus while-Schleife, nur anders)
+  pre.
+    -- Zähler definieren
+    meinZaehler = 1
+    
+    repeat
+      -- Zähler ausgeben
+      print(meinZaehler)
+      
+      -- Zähler inkrementieren
+      meinZaehler = meinZaehler + 1
+    until meinZaehler == 5 -- so lange ausführen, bis der Zähler den Wert 5 erreicht
+
+h3 for-Schleife
+p.
+  Die for-Schleife ist mit guten Grund die weitverwendetste Schleife. Sie tritt in Lua sowohl als Zählschleife auf als auch als generische Schleife, um Tables "durchzugehen"
+  (zu letzterem später mehr)
+  
+div.executor
+  label for-Schleife (und nochmal der Zähler)
+  pre.
+    -- Einen Zähler von 1 bis 4 laufen lassen
+    for meinZaehler = 1, 4 do
+      print(meinZaehler)
+    end
+    
+    -- alternativ kann auch die Schrittgröße beim Hochzählen angegeben werden
+    -- (negative Schritte sind ebenfalls möglich)
+    print("") -- leere Zeile ausgeben
+    for meinZaehler = 0, 2, 0.5 do
+      print(meinZaehler)
+    end
