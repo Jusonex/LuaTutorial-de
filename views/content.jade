@@ -1,5 +1,64 @@
 extends layout
 
+block navigation
+  ul.nav.nav-pills.nav-stacked
+    li: a(href="#introduction") Einleitung
+      ul
+        li: a(href="#audience") Zielgruppe
+        li: a(href="#sources") Quellen
+        li: a(href="#whatislua") Was ist Lua?
+        li: a(href="#thistutorial") Dieses Tutorial
+        li: a(href="#howtoread") Wie lesen
+          
+    li: a(href="#hello_world") Hello World
+    li: a(href="#comments") Kommentare
+      ul
+        li: a(href="#singleline") Einzeilige Kommentare
+        li: a(href="#multiline") Mehrerzeilige Kommentare
+      
+    li: a(href="#variables") Variablen und Datentypen
+      ul
+        li: a(href="#vars") Variablen
+        li: a(href="#literals") Literale
+        li: a(href="#datatypes") Datentypen
+        li: a(href="#variablenames") Variablennamen
+        
+    li: a(href="#controlstructs") Kontrollstrukturen
+      ul
+        li: a(href="#motivation") Motivation
+        li: a(href="#ifcondition") if-Bedingung
+        li: a(href="#compareoperators") Vergleichsoperatoren
+        li: a(href="#ifelse") If-Else
+        li: a(href="#while") While-Schleife
+        li: a(href="#repeatuntil") Repeat-Until-Schleife
+        li: a(href="#for") For-Schleife
+        
+    li: a(href="#blocks") Blöcke und Gültigkeitsbereiche
+      ul
+        li: a(href="#motivation") Motivation
+        li: a(href="#block") Was ist das?
+        li: a(href="#scopes") Gültigkeitsbereiche
+        li: a(href="#localvars") Lokale Variablen
+        
+    li: a(href="#functions") Funktionen
+      ul
+        li: a(href="#motivation") Motivation
+        li: a(href="#parameter") Parameter
+        li: a(href="#return") Rückgaben
+        li: a(href="#syntax") Syntax
+        
+    li: a(href="#strings") Mehr zu Strings
+      ul
+        li: a(href="#concat") Konkatentation
+        li: a(href="#library") Bibliothek
+        
+    li: a(href="#libraries") Weitere Lua Bibliotheken
+    li: a(href="#tables") Tables
+      ul
+        li: a(href="#motivation") Motivation
+        li: a(href="#arrays") Tables als Arrays
+        li: a(href="#maps") Tables als Maps
+
 block body
   include introduction
   include hello_world

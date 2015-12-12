@@ -1,10 +1,10 @@
 h1#controlstructs Kontrollstrukturen
-h3 Motivation
+h3#motivation Motivation
 p.
   Bisher haben wir nur Variablen definiert und auf der Konsole ausgegeben. Damit lässt sich natürlich noch nicht viel machen; vor allem, weil wir nicht in der Lage sind
   zwischen Sachen zu unterscheiden oder Sachen zu wiederholen.
   
-h3 if-Bedingung
+h3#ifcondition if-Bedingung
 p.
   Jeder, der schonmal etwas mit Programmierung zu tun hatte kennt sie: Die if-Bedingung.
   Mit der if-Bedingung/-Verzweigung lässt ein bestimmter Codeteil ausführen, wenn eine Bedingung wahr (oder nicht wahr) ist.
@@ -41,7 +41,7 @@ p.
 
 div.alert.alert-warning Bei Vergleichen muss <strong>immer</strong> der <code>==</code>-Operator verwendet werden. Ein einzelnes Gleichheitszeichen <code>=</code> wird <strong>nur</strong> bei Zuweisungen verwendet!
 
-h3 Vergleichsoperatoren
+h3#compareoperators Vergleichsoperatoren
 table.table.table-striped
   thead
     tr
@@ -67,7 +67,7 @@ table.table.table-striped
       td a >= b
       td Wahr, wenn a größer oder gleich b ist
       
-h3 if-else
+h3#ifelse if-else
 p Für if gibt es noch eine kleine Erweiterung: Den else-Block. Dieser Block wird ausgeführt, wenn die Bedingung zwischen <code>if</code> und <code>then</code> <strong>nicht</strong> nicht wahr ist.
 
 div.executor
@@ -81,7 +81,7 @@ div.executor
       print("Nein, Leetspeak ist besser")
     end
 
-h3 while-Schleife
+h3#while while-Schleife
 p.
   Die wohl wichtigste, aber nicht am meisten verwendet Schleife ist die <i>while</i>-Schleife. Sie führt einen Codeteil (= Block) so lange aus wie eine Bedingung wahr ist.
 
@@ -104,7 +104,7 @@ div.alert.alert-warning Achte immer darauf, dass eine Bedingung auch eintritt, a
 p.
   Mit einer while-Schleife lassen sich alle anderen Schleifentypen nachbauen, jedoch erlauben andere Schleifentypen in vielen Fällen eine kürzere und elegantere Lösung.
 
-h3 repeat-until-Schleife
+h3#repeatuntil repeat-until-Schleife
 p.
   Die <i>repeat-until</i>-Schleife verhält sich insgesamt recht ähnlich zur normalen <i>while</i>-Schleife, weist jedoch den Unterschied auf, dass der Schleifenrumpf (Code in der Schleife)
   einmal ausgeführt wird, bevor die Bedingung überprüft wird und die Schleife erst abgebrochen wird, wenn die Bedingung wahr wird.
@@ -123,7 +123,7 @@ div.executor
       meinZaehler = meinZaehler + 1
     until meinZaehler == 5 -- so lange ausführen, bis der Zähler den Wert 5 erreicht
 
-h3 for-Schleife
+h3#for for-Schleife
 p.
   Die for-Schleife ist mit guten Grund die weitverwendetste Schleife. Sie tritt in Lua sowohl als Zählschleife auf als auch als generische Schleife, um Tables "durchzugehen"
   (zu letzterem später mehr)
