@@ -1,187 +1,190 @@
-h1#tables Tables
-p.
-  Tables sind definitiv das mächtigste Werkzeug, das Lua mitbringt und auch die Stelle, bei der sich Lua am meisten von anderen Skript- und Programmiersprachen unterscheidet.
-  Tables fassen dabei die Konzepte von Arrays und Maps/Dictionaries aus anderen Programmiersprachen zusammen.
+extends content
 
-h3#motivation Motivation
-p.
-  Angenommen man möchte Spielern Fahrzeuge zuordnen. Im Laufe der Zeit habe ich immer mal wieder solche Codeschnipsel gesehen:
-  
-div.executor
-  label So nicht... (vereinfacht)
-  pre.
-    local player1 = "meinFahrzeug1"
-    local player2 = "meinFahrzeug2"
-    local player3 = "meinFahrzeug3"
-    -- ...
-    local player100 = "meinFahrzeug100"
+block body
+  h1#tables Tables
+  p.
+    Tables sind definitiv das mächtigste Werkzeug, das Lua mitbringt und auch die Stelle, bei der sich Lua am meisten von anderen Skript- und Programmiersprachen unterscheidet.
+    Tables fassen dabei die Konzepte von Arrays und Maps/Dictionaries aus anderen Programmiersprachen zusammen.
 
-p.
-  Um nun auf die Fahrzeuge der Spieler zuzugreifen, von denen man den Slot hat (also das, was hier 1, 2, 3, ..., 100 ist), müsste man jetzt weitere wirre Dinge mit der <i>_G Umgebung</i>,
-  die tiefgehende Erklärung dazu ist an dieser Stelle jedoch noch zu kompliziert (siehe Tutorial für Fortgeschrittene).
-
-p.
-  Stattdessen wäre es viel einfacher und eleganter das ganze <i>dynamischer</i> zu machen.
-  
-div.executor
-  label ...der elegante Weg
-  pre.
-    local players = {}
-    for i = 0, 100 do
-      players[i] = "meinFahrzeug"..i
-    end
-
-p.
-  Dabei wird <code>players</code> mit den geschweiften Klammern als sogenannte <strong>Table</strong> definiert.<br/>
-  Tables ermöglichen es uns auf einfache Art und Weise Dinge aufzulisten (<i>Arrays</i>) oder etwas etwas anderem zuzuordnen (<i>Maps</i>).
-
-h3#arrays Tables als Arrays/Listen
-p.
-  Zunächst soll die Funktion von Tables als Arrays (Feld von Werten) oder Listen genauer betrachtet werden.
-  Dazu betrachten wir folgende Ausgangssituation:<br/>
-  Wir möchten alle Monate des Jahres ausgeben. In der einfachen, aber langen Version könnten wir mit der <code>print</code>-Funktion über 12 Zeilen alle Monate ausgeben.<br/>
-  Das ist uns jedoch zu aufwendig und neue Monate hinzuzufügen ist recht schwierig (ja, das Jahr wird regelmäßig um neue Monate ergänzt).
-  
-p.
-  Die Werte in einer Table bezeichnet man als <strong>Elemente</strong>. Um nach der Definition auf Werte zuzugreifen, wird der <code>[]</code>-Operator verwendet.
-  Zwischen den eckigen Klammern steht dabei die Position in der Liste, wobei ab 1 gezählt wird.
-
-div.executor
-  label 12 Monate
-  pre.
-    -- Table als Liste mit allen Monaten definieren
-    -- dabei werden alle Elemente durch Kommata getrennt hintereinander aufgelistet
-    local monate = {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"}
+  h3#motivation Motivation
+  p.
+    Angenommen man möchte Spielern Fahrzeuge zuordnen. Im Laufe der Zeit habe ich immer mal wieder solche Codeschnipsel gesehen:
     
-    -- 1. Element ausgeben
-    print("1. Monat ist: "..monate[1])
-    print("") -- leere Zeile
+  div.executor
+    label So nicht... (vereinfacht)
+    pre.
+      local player1 = "meinFahrzeug1"
+      local player2 = "meinFahrzeug2"
+      local player3 = "meinFahrzeug3"
+      -- ...
+      local player100 = "meinFahrzeug100"
+
+  p.
+    Um nun auf die Fahrzeuge der Spieler zuzugreifen, von denen man den Slot hat (also das, was hier 1, 2, 3, ..., 100 ist), müsste man jetzt weitere wirre Dinge mit der <i>_G Umgebung</i>,
+    die tiefgehende Erklärung dazu ist an dieser Stelle jedoch noch zu kompliziert (siehe Tutorial für Fortgeschrittene).
+
+  p.
+    Stattdessen wäre es viel einfacher und eleganter das ganze <i>dynamischer</i> zu machen.
     
-    -- Jetzt alle Monaten mithilfe einer for-Schleife ausgeben
-    for i = 1, 12 do
-      -- i-tes Element auslesen
-      print(monate[i])
-    end
+  div.executor
+    label ...der elegante Weg
+    pre.
+      local players = {}
+      for i = 0, 100 do
+        players[i] = "meinFahrzeug"..i
+      end
 
-p.
-  Hier wird deutlich warum die for-Schleife so wichtig ist - mit ihr kann eine Table ganz leicht durchgegangen werden (in der Fachsprache <strong>iterieren</strong> genannt).
+  p.
+    Dabei wird <code>players</code> mit den geschweiften Klammern als sogenannte <strong>Table</strong> definiert.<br/>
+    Tables ermöglichen es uns auf einfache Art und Weise Dinge aufzulisten (<i>Arrays</i>) oder etwas etwas anderem zuzuordnen (<i>Maps</i>).
 
-p.
-  Angenommen, Gott sollte mal schlechte Laune haben und beschließen die Naturgesetze zu ändern und einen neuen Monat einzufügen, müssen wir als Programmierer natürlich
-  schnell reagieren und unsere Software anpassen. Wir können unsere Liste oben jedoch nicht ergänzen, sondern müssen nachträglich einen 13. Monat hinzufügen.<br/>
-  Dazu können wir den <code>[]</code>-Operator nicht nur verwenden, um lesend auf Elemente zuzugreifen, sondern um auch neue Werte einzufügen/vorhandenen zu überschreiben, wenn der
-  Operator auf der linken Seite des <code>=</code>-Operators steht.
-
-div.alert.alert-info
-  <strong>Pro tip:</strong> Um die Anzahl der Element in einer Table zu ermitteln, kann ähnlich wie bei Strings der <code>#</code>-Operator verwendet werden.
-
-div.executor
-  label Neue Monate - das geht!
-  pre.
-    local monate = {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"}
+  h3#arrays Tables als Arrays/Listen
+  p.
+    Zunächst soll die Funktion von Tables als Arrays (Feld von Werten) oder Listen genauer betrachtet werden.
+    Dazu betrachten wir folgende Ausgangssituation:<br/>
+    Wir möchten alle Monate des Jahres ausgeben. In der einfachen, aber langen Version könnten wir mit der <code>print</code>-Funktion über 12 Zeilen alle Monate ausgeben.<br/>
+    Das ist uns jedoch zu aufwendig und neue Monate hinzuzufügen ist recht schwierig (ja, das Jahr wird regelmäßig um neue Monate ergänzt).
     
-    -- 13. Monat hinzufügen
-    monate[13] = "Undecimber" -- siehe: https://en.wikipedia.org/wiki/Undecimber
-    
-    -- alles ausgeben
-    for i = 1, #monate do
-      print(monate[i])
-    end
+  p.
+    Die Werte in einer Table bezeichnet man als <strong>Elemente</strong>. Um nach der Definition auf Werte zuzugreifen, wird der <code>[]</code>-Operator verwendet.
+    Zwischen den eckigen Klammern steht dabei die Position in der Liste, wobei ab 1 gezählt wird.
 
-h3#maps Tables als Maps/Dictionaries - assoziative Tables
-p.
-  Manchmal reicht es nicht Werte einfach nur aufzulisten. Stattdessen möchte man einem Wert einen anderen Wert zuordnen. Bei solchen Zuordnungen spricht man auch
-  von <strong>Schlüssel-Wert Zuordnungen</strong> (engl.: <strong>Key-value</strong>):<br/>
-  Der Schlüssel ist der Wert, dem etwas zugeordnet wird. Der Wert ist der Wert, der zugeordnet wurde.
-  Dabei kann in Lua jeder beliebige Datentyp sowohl als Schlüssel als auch als Wert genommen werden.
-
-div.executor
-  label Tables als Maps
-  pre.
-    -- leere Table definieren
-    local playerIDs = {}
+  div.executor
+    label 12 Monate
+    pre.
+      -- Table als Liste mit allen Monaten definieren
+      -- dabei werden alle Elemente durch Kommata getrennt hintereinander aufgelistet
+      local monate = {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"}
       
-    -- Schlüsseln SpielernameX eine Zahl (hier: die Spieler ID) zuordnen
-    playerIDs["Spielername1"] = 42
-    playerIDs["Spielername2"] = 1337
+      -- 1. Element ausgeben
+      print("1. Monat ist: "..monate[1])
+      print("") -- leere Zeile
+      
+      -- Jetzt alle Monaten mithilfe einer for-Schleife ausgeben
+      for i = 1, 12 do
+        -- i-tes Element auslesen
+        print(monate[i])
+      end
 
-    -- Hat man jetzt den Spielernamen...
-    local playerName = "Spielername2"
+  p.
+    Hier wird deutlich warum die for-Schleife so wichtig ist - mit ihr kann eine Table ganz leicht durchgegangen werden (in der Fachsprache <strong>iterieren</strong> genannt).
+
+  p.
+    Angenommen, Gott sollte mal schlechte Laune haben und beschließen die Naturgesetze zu ändern und einen neuen Monat einzufügen, müssen wir als Programmierer natürlich
+    schnell reagieren und unsere Software anpassen. Wir können unsere Liste oben jedoch nicht ergänzen, sondern müssen nachträglich einen 13. Monat hinzufügen.<br/>
+    Dazu können wir den <code>[]</code>-Operator nicht nur verwenden, um lesend auf Elemente zuzugreifen, sondern um auch neue Werte einzufügen/vorhandenen zu überschreiben, wenn der
+    Operator auf der linken Seite des <code>=</code>-Operators steht.
+
+  div.alert.alert-info
+    <strong>Pro tip:</strong> Um die Anzahl der Element in einer Table zu ermitteln, kann ähnlich wie bei Strings der <code>#</code>-Operator verwendet werden.
+
+  div.executor
+    label Neue Monate - das geht!
+    pre.
+      local monate = {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"}
+      
+      -- 13. Monat hinzufügen
+      monate[13] = "Undecimber" -- siehe: https://en.wikipedia.org/wiki/Undecimber
+      
+      -- alles ausgeben
+      for i = 1, #monate do
+        print(monate[i])
+      end
+
+  h3#maps Tables als Maps/Dictionaries - assoziative Tables
+  p.
+    Manchmal reicht es nicht Werte einfach nur aufzulisten. Stattdessen möchte man einem Wert einen anderen Wert zuordnen. Bei solchen Zuordnungen spricht man auch
+    von <strong>Schlüssel-Wert Zuordnungen</strong> (engl.: <strong>Key-value</strong>):<br/>
+    Der Schlüssel ist der Wert, dem etwas zugeordnet wird. Der Wert ist der Wert, der zugeordnet wurde.
+    Dabei kann in Lua jeder beliebige Datentyp sowohl als Schlüssel als auch als Wert genommen werden.
+
+  div.executor
+    label Tables als Maps
+    pre.
+      -- leere Table definieren
+      local playerIDs = {}
+        
+      -- Schlüsseln SpielernameX eine Zahl (hier: die Spieler ID) zuordnen
+      playerIDs["Spielername1"] = 42
+      playerIDs["Spielername2"] = 1337
+
+      -- Hat man jetzt den Spielernamen...
+      local playerName = "Spielername2"
+      
+      -- ...kann man ganz leicht die ID ermitteln
+      print("ID des Spielers: "..playerIDs[playerName])
+
+  p.
+    Der Zugriff auf die Elemente sieht ganz ähnlich wie bei der Verwendung der Tables als Listen aus - mit dem Unterschied, dass dieses Mal ein String als Schlüssel verwendet wurde.
+
+  p.
+    Nun könnte man hierfür auch eine Liste nehmen, die weitere Listen enthält (im Stil: <code>playerInfo = {{1, "Spielername1"}, {2, "Spielername2"}}</code>) und dann, um die Elemente entweder
+    Name oder ID zu finden alle Elemente durchgehen und mit einer <i>if-Abfrage</i> vergleichen, ob es sich um das gesuchte Element handelt.<br/>
+    Das ist zwar möglich und funktioniert auch, jedoch muss dabei <strong>jedes</strong> Element in der Liste betrachtet werden. Dies nennt man in der Informatik auch <i>linearen Zeitaufwand</i>.
     
-    -- ...kann man ganz leicht die ID ermitteln
-    print("ID des Spielers: "..playerIDs[playerName])
+  p.
+    Tables dagegen verwenden intern sogenannte <a href="https://de.wikipedia.org/wiki/Hashtabelle">Hashtabellen</a>. Dabei wird eine mathematische Funktion verwendet,
+    um die Position des gesuchten Elements zu errechnen. Im besten Fall kann dies in konstanter Zeit durchgeführt werden, d.h. die benötigte Zeit ist <i>unabhängig</i> von der
+    Anzahl der Elemente in der Liste.<br/>
+    Genau aus diesem Grund sollten Tables solchen Konstruktionen vorgezogen werden.
 
-p.
-  Der Zugriff auf die Elemente sieht ganz ähnlich wie bei der Verwendung der Tables als Listen aus - mit dem Unterschied, dass dieses Mal ein String als Schlüssel verwendet wurde.
+  div.alert.alert-info
+    <strong>Pro tip:</strong> Lua erlaubt auch <code>playerIDs["Spielername1"]</code> kürzer als <code>playerIDs.Spielername1</code> darzustellen (wenn der Schlüssel ein String ist).
+    | Beide Varianten sind dann äquivalent (diese Vereinfachung wird insbesondere bei der objektorientierten Programmierung noch eine große Rolle spielen)
 
-p.
-  Nun könnte man hierfür auch eine Liste nehmen, die weitere Listen enthält (im Stil: <code>playerInfo = {{1, "Spielername1"}, {2, "Spielername2"}}</code>) und dann, um die Elemente entweder
-  Name oder ID zu finden alle Elemente durchgehen und mit einer <i>if-Abfrage</i> vergleichen, ob es sich um das gesuchte Element handelt.<br/>
-  Das ist zwar möglich und funktioniert auch, jedoch muss dabei <strong>jedes</strong> Element in der Liste betrachtet werden. Dies nennt man in der Informatik auch <i>linearen Zeitaufwand</i>.
-  
-p.
-  Tables dagegen verwenden intern sogenannte <a href="https://de.wikipedia.org/wiki/Hashtabelle">Hashtabellen</a>. Dabei wird eine mathematische Funktion verwendet,
-  um die Position des gesuchten Elements zu errechnen. Im besten Fall kann dies in konstanter Zeit durchgeführt werden, d.h. die benötigte Zeit ist <i>unabhängig</i> von der
-  Anzahl der Elemente in der Liste.<br/>
-  Genau aus diesem Grund sollten Tables solchen Konstruktionen vorgezogen werden.
+  h4 Initiale Definition von Tables als Maps
+  p Natürlich lassen sich Tables auch direkt mit Schlüssen und Werten bei der Definition initialisieren.
 
-div.alert.alert-info
-  <strong>Pro tip:</strong> Lua erlaubt auch <code>playerIDs["Spielername1"]</code> kürzer als <code>playerIDs.Spielername1</code> darzustellen (wenn der Schlüssel ein String ist).
-  | Beide Varianten sind dann äquivalent (diese Vereinfachung wird insbesondere bei der objektorientierten Programmierung noch eine große Rolle spielen)
+  div.executor
+    label Definition mit Werten
+    pre.
+      local playerIDs = {
+        ["Spielername1"] = 42,
+        ["Spielername2"] = 1337
+      }
+      
+      -- im Falle von Strings als Schlüssel ist auch wieder folgende Vereinfachung möglich
+      -- beide Varianten sind äquivalent
+      playerIDs = {
+        Spielername1 = 42,
+        Spielername2 = 1337
+      }
+      
+      -- etwas ausgeben
+      print(playerIDs["Spielername1"])
+      print(playerIDs.Spielername2)
 
-h4 Initiale Definition von Tables als Maps
-p Natürlich lassen sich Tables auch direkt mit Schlüssen und Werten bei der Definition initialisieren.
+  h4 Maps durchiterieren - die generische for-Schleife
+  p.
+    Wie dir vielleicht an dieser Stelle aufgefallen ist, können wir diese Maps nicht so leicht wie Tables als Arrays/Listen durchgehen, da wir ja noch nicht wissen,
+    was zwischen den eckigen Klammern stehen <i>kann</i>.<br/>
+    Dies führt uns zur sogenannten <strong>generischen for-Schleife</strong>, die eine leicht andere Syntax als die <strong>numerische</strong> for-Schleife hat, die wir schon kennen.
 
-div.executor
-  label Definition mit Werten
-  pre.
-    local playerIDs = {
-      ["Spielername1"] = 42,
-      ["Spielername2"] = 1337
-    }
+  div.executor
+    label Die generische for-Schleife
+    pre.
+      -- Table definieren
+      local playerIDs = {
+        ["Spielername1"] = 42,
+        ["Spielername2"] = 1337,
+        ["Spieler1337"] = "DerHatKeineID"
+      }
+      
+      -- Table durchiterieren / durchgehen
+      for name, id in pairs(playerIDs) do
+        print("Name des Spielers: "..name)
+        print("ID des Spielers: "..id)
+        print("") -- lere Zeile
+      end
+
+  p.
+    Dabei stehen zwischen dem <code>for</code> und <code>in</code> als erstes der Schlüssel (also das, was bei der Definition in den eckigen Klammern steht), gefolgt
+    vom Wert (das, was bei der Definition hinter dem Gleichheitszeichen steht).<br/>
+    <code>pairs</code> ist dabei die Funktion, die das eigentliche Verhalten des "durchgehen" definiert und einen sogenannten <strong>Iterator</strong> zurückgibt.
     
-    -- im Falle von Strings als Schlüssel ist auch wieder folgende Vereinfachung möglich
-    -- beide Varianten sind äquivalent
-    playerIDs = {
-      Spielername1 = 42,
-      Spielername2 = 1337
-    }
-    
-    -- etwas ausgeben
-    print(playerIDs["Spielername1"])
-    print(playerIDs.Spielername2)
+  p.
+    Iterationen sind jedoch ein etwas komplizierteres Thema und werden deshalb erst im Tutorial für Fortgeschrittene erläutert. Für jetzt reicht es zu wissen, dass <code>pairs</code>
+    zusammen mit der generischen for-Schleife (<code>for ... in</code>), um eine Table durchzuiterieren.
 
-h4 Maps durchiterieren - die generische for-Schleife
-p.
-  Wie dir vielleicht an dieser Stelle aufgefallen ist, können wir diese Maps nicht so leicht wie Tables als Arrays/Listen durchgehen, da wir ja noch nicht wissen,
-  was zwischen den eckigen Klammern stehen <i>kann</i>.<br/>
-  Dies führt uns zur sogenannten <strong>generischen for-Schleife</strong>, die eine leicht andere Syntax als die <strong>numerische</strong> for-Schleife hat, die wir schon kennen.
-
-div.executor
-  label Die generische for-Schleife
-  pre.
-    -- Table definieren
-    local playerIDs = {
-      ["Spielername1"] = 42,
-      ["Spielername2"] = 1337,
-      ["Spieler1337"] = "DerHatKeineID"
-    }
-    
-    -- Table durchiterieren / durchgehen
-    for name, id in pairs(playerIDs) do
-      print("Name des Spielers: "..name)
-      print("ID des Spielers: "..id)
-      print("") -- lere Zeile
-    end
-
-p.
-  Dabei stehen zwischen dem <code>for</code> und <code>in</code> als erstes der Schlüssel (also das, was bei der Definition in den eckigen Klammern steht), gefolgt
-  vom Wert (das, was bei der Definition hinter dem Gleichheitszeichen steht).<br/>
-  <code>pairs</code> ist dabei die Funktion, die das eigentliche Verhalten des "durchgehen" definiert und einen sogenannten <strong>Iterator</strong> zurückgibt.
-  
-p.
-  Iterationen sind jedoch ein etwas komplizierteres Thema und werden deshalb erst im Tutorial für Fortgeschrittene erläutert. Für jetzt reicht es zu wissen, dass <code>pairs</code>
-  zusammen mit der generischen for-Schleife (<code>for ... in</code>), um eine Table durchzuiterieren.
-
-div.alert.alert-info
-  <strong>Pro tip:</strong> Natürlich lassen sich auch Tables als Arrays/Listen mit der generischen for-Schleife auf exakt dem gleichen Weg durchgehen.
+  div.alert.alert-info
+    <strong>Pro tip:</strong> Natürlich lassen sich auch Tables als Arrays/Listen mit der generischen for-Schleife auf exakt dem gleichen Weg durchgehen.

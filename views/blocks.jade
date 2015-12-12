@@ -1,38 +1,41 @@
-h1#blocks Blöcke und Gültigkeitsbereiche
-h3#motivation Motivation
-p.
-  Variablen sind eine schöne Sache, bei größeren Skripten (die schon mal locker mehrere 1000 Variablennamen haben) müsste man sich schon eine besondere Konvention wie
-  <i>meinZaehler1, meinZaehler2, meinZaehler3, ...</i> überlegen, um Namenskonflikte zu vermeiden.
-  Bei noch mehr Variablen geht das auf die Dauer natürlich schief.<br/>
-  Dies ist ein Grund dafür, dass man Gültigkeitsbereiche und sog. lokale Variablen eingeführt hat (ein anderer Grund ist Speichereffizienz)
+extends content
 
-h3#block Was ist ein Block?
-p.
-  Ein Block ist der Code zwischen dem <code>then</code> und <code>end</code> einer if-Bedingung oder der Code zwischen dem <code>do</code> und <code>end</code> einer Schleife.
-  In diesem Tutorial sind neue Blöcke immer eingerückt (d.h. um ein paar Leerzeichen versetzt), um die Übersicht zu steigern.
-  Dies ist auch generell so üblich und sollte immer gemacht werden.
+block body
+  h1#blocks Blöcke und Gültigkeitsbereiche
+  h3#motivation Motivation
+  p.
+    Variablen sind eine schöne Sache, bei größeren Skripten (die schon mal locker mehrere 1000 Variablennamen haben) müsste man sich schon eine besondere Konvention wie
+    <i>meinZaehler1, meinZaehler2, meinZaehler3, ...</i> überlegen, um Namenskonflikte zu vermeiden.
+    Bei noch mehr Variablen geht das auf die Dauer natürlich schief.<br/>
+    Dies ist ein Grund dafür, dass man Gültigkeitsbereiche und sog. lokale Variablen eingeführt hat (ein anderer Grund ist Speichereffizienz)
 
-h3#scopes Gültigkeitsbereiche
-p.
-  Gültigkeitsbereiche sind die Bereiche, in denen eine lokale Variable gültig ist.
-  
-h3#localvars Lokale Variablen
-p.
-  Lokale Variablen sind nur in ihrem Gültigkeitsbereich, ihrem Block gültig und werden nach Verlassen des Blocks im Regelfall gelöscht.
-  Sie werden mit dem Schlüsselwort <code>local</code> vor dem Variablennamen definiert
-  
-div.executor
-  label Lokale Variablen
-  pre.
-    -- Diese Variable ist nur in dieser Skriptdatei gültig
-    local a = 1
+  h3#block Was ist ein Block?
+  p.
+    Ein Block ist der Code zwischen dem <code>then</code> und <code>end</code> einer if-Bedingung oder der Code zwischen dem <code>do</code> und <code>end</code> einer Schleife.
+    In diesem Tutorial sind neue Blöcke immer eingerückt (d.h. um ein paar Leerzeichen versetzt), um die Übersicht zu steigern.
+    Dies ist auch generell so üblich und sollte immer gemacht werden.
+
+  h3#scopes Gültigkeitsbereiche
+  p.
+    Gültigkeitsbereiche sind die Bereiche, in denen eine lokale Variable gültig ist.
     
-    if (true) then
-      -- Diese Variable ist nur in diesem Block (der if-Bedingung) gültig
-      local b = 2
-      print(b)
-    end
+  h3#localvars Lokale Variablen
+  p.
+    Lokale Variablen sind nur in ihrem Gültigkeitsbereich, ihrem Block gültig und werden nach Verlassen des Blocks im Regelfall gelöscht.
+    Sie werden mit dem Schlüsselwort <code>local</code> vor dem Variablennamen definiert
+    
+  div.executor
+    label Lokale Variablen
+    pre.
+      -- Diese Variable ist nur in dieser Skriptdatei gültig
+      local a = 1
+      
+      if (true) then
+        -- Diese Variable ist nur in diesem Block (der if-Bedingung) gültig
+        local b = 2
+        print(b)
+      end
 
-    -- Hier ist die Variable nicht mehr gültig
-    -- Zur Erinnerung: Nicht definierte/gültige Variablen haben den Wert nil
-    print(b)
+      -- Hier ist die Variable nicht mehr gültig
+      -- Zur Erinnerung: Nicht definierte/gültige Variablen haben den Wert nil
+      print(b)

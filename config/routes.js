@@ -46,4 +46,14 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+  '/beginner/introduction': {view: 'introduction'},
+  '/beginner/hello_world': {view: 'hello_world'},
+  '/beginner/comments': {view: 'comments'},
+  '/beginner/variables': {view: 'variables'},
+  '/beginner/controlstructs': {view: 'controlstructs'},
+  '/beginner/blocks': {view: 'blocks'},
+  '/beginner/functions': {view: 'functions'},
+  '/beginner/strings': {view: 'strings'},
+  '/beginner/libraries': {view: 'libraries'},
+  '/beginner/tables': {view: 'tables'},
 };

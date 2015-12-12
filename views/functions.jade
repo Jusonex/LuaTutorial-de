@@ -1,47 +1,50 @@
-h1#functions Funktionen
-h3#motivation Motivation
-p.
-  Oft ist man in der Situation, dass ein bestimmer Codeteil an bestimmten Stellen immer wieder benötigt wird (z.B. eine komplexere Berechnung).
-  Diesen Code jedes Mal komplett zu kopieren würde nicht nur viele unnötige Codezeilen erzeugen, sondern auch die Wartbarkeit erheblich verringern, da im Falle eines Bugs in
-  diesem Codeteil alle Stellen gefunden und repariert werden können, obwohl es sowieso überall der gleiche Code ist.<br/>
-  Wie sich jetzt leicht vermuten lässt, lösen Funktionen dieses Problem
-  
-h3#parameter Parameter
-p.
-  In vielen Fällen ist der Code in einer Funktion von zusätzlichen Eingaben abhängig. Damit nicht für jeden nur erdenklichen Fall dieser abhängigen Werte eine eigene Funktion
-  geschrieben werden muss, wurden die sogenannten <strong>(Funktions-)parameter</strong> eingeführt.
-  
-h3#return Rückgabewert
-p.
-  Da in den meisten Fällen nur eine bestimmte Prozedur ausgeführt wird, muss eine Funktion nicht nur Eingaben (über Parameter), sondern auch Ausgaben erzeugen können.
-  Dazu gibt es die sogenannten <strong>Rückgabewerte</strong>.
+extends content
 
-h3#syntax Syntax
-div.executor
-  label Beispiel zu Funktionen
-  pre.
-    -- Funktionen mit dem Namen "meineFunktion" definieren
-    function meineFunktion(parameter1, parameter2) -- mit 2 Eingaben
-      -- beide Parameter (Eingaben) addieren und in Variable "ergebnis" speichern
-      local ergebnis = parameter1 + parameter2
-      
-      -- Rückgaben werden mit dem "return" Schlüsselwort angegeben
-      return ergebnis
-    end
+block body
+  h1#functions Funktionen
+  h3#motivation Motivation
+  p.
+    Oft ist man in der Situation, dass ein bestimmer Codeteil an bestimmten Stellen immer wieder benötigt wird (z.B. eine komplexere Berechnung).
+    Diesen Code jedes Mal komplett zu kopieren würde nicht nur viele unnötige Codezeilen erzeugen, sondern auch die Wartbarkeit erheblich verringern, da im Falle eines Bugs in
+    diesem Codeteil alle Stellen gefunden und repariert werden können, obwohl es sowieso überall der gleiche Code ist.<br/>
+    Wie sich jetzt leicht vermuten lässt, lösen Funktionen dieses Problem
     
-    -- Jetzt die Funktion "aufrufen"
-    local rueckgabe = meineFunktion(1, 3)
-    print(rueckgabe)
+  h3#parameter Parameter
+  p.
+    In vielen Fällen ist der Code in einer Funktion von zusätzlichen Eingaben abhängig. Damit nicht für jeden nur erdenklichen Fall dieser abhängigen Werte eine eigene Funktion
+    geschrieben werden muss, wurden die sogenannten <strong>(Funktions-)parameter</strong> eingeführt.
+    
+  h3#return Rückgabewert
+  p.
+    Da in den meisten Fällen nur eine bestimmte Prozedur ausgeführt wird, muss eine Funktion nicht nur Eingaben (über Parameter), sondern auch Ausgaben erzeugen können.
+    Dazu gibt es die sogenannten <strong>Rückgabewerte</strong>.
 
-p.
-  Funktionen werden mit dem Schlüsselwort <code>function</code> eingeleitet, direkt gefolgt vom Namen der Funktion.
-  Danach folgen in runden Klammern die Namen der Parameter. Die Parameter verhalten sich innerhalb der Funktion genauso wie lokale Variablen.<br/>
-  Schließlich wird mit dem Schlüsselwort <code>return</code> die <i>lokale</i> Variable <code>ergebnis</code> zurückgegeben.
+  h3#syntax Syntax
+  div.executor
+    label Beispiel zu Funktionen
+    pre.
+      -- Funktionen mit dem Namen "meineFunktion" definieren
+      function meineFunktion(parameter1, parameter2) -- mit 2 Eingaben
+        -- beide Parameter (Eingaben) addieren und in Variable "ergebnis" speichern
+        local ergebnis = parameter1 + parameter2
+        
+        -- Rückgaben werden mit dem "return" Schlüsselwort angegeben
+        return ergebnis
+      end
+      
+      -- Jetzt die Funktion "aufrufen"
+      local rueckgabe = meineFunktion(1, 3)
+      print(rueckgabe)
 
-p.
-  Der Aufruf der Funktion sollte dir bekannt von der Funktion <code>print</code> vorkommen, die uns schon die ganze Zeit begleitet.
-  Hier wird ganz intuitiv der Name der Funktion, gefolgt von runden Klammern, zwischen denen sich die Eingaben/Parameter der Funktion befinden, geschrieben.
-  Dabei können natürlich sowohl Variablen als auch direkt Werte (<i>Literale</i>) übergeben werden.
-  
-div.alert.alert-info
-  <strong>Pro tip:</strong> Es können auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
+  p.
+    Funktionen werden mit dem Schlüsselwort <code>function</code> eingeleitet, direkt gefolgt vom Namen der Funktion.
+    Danach folgen in runden Klammern die Namen der Parameter. Die Parameter verhalten sich innerhalb der Funktion genauso wie lokale Variablen.<br/>
+    Schließlich wird mit dem Schlüsselwort <code>return</code> die <i>lokale</i> Variable <code>ergebnis</code> zurückgegeben.
+
+  p.
+    Der Aufruf der Funktion sollte dir bekannt von der Funktion <code>print</code> vorkommen, die uns schon die ganze Zeit begleitet.
+    Hier wird ganz intuitiv der Name der Funktion, gefolgt von runden Klammern, zwischen denen sich die Eingaben/Parameter der Funktion befinden, geschrieben.
+    Dabei können natürlich sowohl Variablen als auch direkt Werte (<i>Literale</i>) übergeben werden.
+    
+  div.alert.alert-info
+    <strong>Pro tip:</strong> Es können auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
