@@ -12,11 +12,16 @@ block navigation
           li: a(href="/beginner/introduction#howtoread") Wie lesen
           
     li: a(href="/beginner/hello_world") Hello World
+      if (req.path == "/beginner/hello_world")
+        ul
+          li: a(href="/beginner/hello_world#exercise") Übung
+    
     li: a(href="/beginner/comments") Kommentare
       if (req.path == "/beginner/comments")
         ul
           li: a(href="/beginner/comments#singleline") Einzeilige Kommentare
           li: a(href="/beginner/comments#multiline") Mehrerzeilige Kommentare
+          li: a(href="/beginner/comments#exercise") Übung
       
     li: a(href="/beginner/variables") Variablen und Datentypen
       if (req.path == "/beginner/variables")
@@ -25,6 +30,7 @@ block navigation
           li: a(href="/beginner/variables#literals") Literale
           li: a(href="/beginner/variables#datatypes") Datentypen
           li: a(href="/beginner/variables#variablenames") Variablennamen
+          li: a(href="/beginner/variables#exercise") Übung
         
     li: a(href="/beginner/controlstructs") Kontrollstrukturen
       if (req.path == "/beginner/controlstructs")
@@ -36,6 +42,7 @@ block navigation
           li: a(href="/beginner/controlstructs#while") While-Schleife
           li: a(href="/beginner/controlstructs#repeatuntil") Repeat-Until-Schleife
           li: a(href="/beginner/controlstructs#for") For-Schleife
+          li: a(href="/beginner/controlstructs#exercise") Übung
         
     li: a(href="/beginner/blocks") Blöcke und Gültigkeitsbereiche
       if (req.path == "/beginner/blocks")
@@ -44,6 +51,7 @@ block navigation
           li: a(href="/beginner/blocks#block") Was ist das?
           li: a(href="/beginner/blocks#scopes") Gültigkeitsbereiche
           li: a(href="/beginner/blocks#localvars") Lokale Variablen
+          li: a(href="/beginner/blocks#exercise") Übung
         
     li: a(href="/beginner/functions") Funktionen
       if (req.path == "/beginner/functions")
@@ -52,12 +60,14 @@ block navigation
           li: a(href="/beginner/functions#parameter") Parameter
           li: a(href="/beginner/functions#return") Rückgaben
           li: a(href="/beginner/functions#syntax") Syntax
+          li: a(href="/beginner/functions#exercise") Übung
         
     li: a(href="/beginner/strings") Mehr zu Strings
       if (req.path == "/beginner/strings")
         ul
           li: a(href="/beginner/strings#concat") Konkatentation
           li: a(href="/beginner/strings#library") Bibliothek
+          li: a(href="/beginner/strings#exercise") Übung
         
     li: a(href="/beginner/libraries") Weitere Lua Bibliotheken
     li: a(href="/beginner/tables") Tables
@@ -66,6 +76,7 @@ block navigation
           li: a(href="/beginner/tables#motivation") Motivation
           li: a(href="/beginner/tables#arrays") Tables als Arrays
           li: a(href="/beginner/tables#maps") Tables als Maps
+          li: a(href="/beginner/tables#exercise") Übung
   
   //-
     Kapitel:

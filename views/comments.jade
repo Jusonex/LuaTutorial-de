@@ -1,5 +1,6 @@
 extends content
 
+block body
   h1#comments Kommentare
   p.
     Kommentare sind kurze Texte, die im Quellcode an (fast) beliebigen Stellen eingefügt werden können. Das Ziel von Kommentaren ist schwierigere Codeteile zu erklären.
@@ -39,3 +40,18 @@ extends content
     An dieser Stelle ist zu sehen, wie sehr <i>Syntax Highlighting</i> (farbige Markierung des Quelltextes) zur Übersicht des Codes beitragen kann.
     Daher empfielt es sich in jedem Fall einen guten Editor zum Programmieren zu benutzen.
   // TODO: Verweis@Sektion: Tools
+
+  h3#exercise Übung
+  p Gib irgendeinen Text aus und verwende beide Arten von Kommentaren
+  
+  div.solution
+    div.content
+      div.executor
+        label Lösung: Hallo Welt
+        pre.
+          --[[
+            Dieser Code ist kein Code
+          ]]
+        
+          -- Text auf der Konsole ausgeben
+          print("Hallo Welt")
