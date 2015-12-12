@@ -39,12 +39,21 @@ html
         div.col-md-9
           block body
 
+    div#testerButton Tester
+    div#testerWindow
+      a#minimize Minimieren
+      textarea(placeholder="Gib deinen Code hier ein").form-control
+      pre.output
+      button.btn.btn-success#runButton Ausführen
+      button.btn.btn-danger#resetButton Zurücksetzen
+
     // The linker searches for this tag and adds js.  If there's no linker, we point to sails.io.js
     // SCRIPTS
     script(src="/js/dependencies/sails.io.js")
     script(src="/js/executor.js")
     script(src="/js/highlight.pack.js")
     script(src="/js/lua.vm.js")
+    script(src="/js/tester.js")
     // SCRIPTS END
     script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
   

@@ -17,7 +17,8 @@ var Module = {
 // Add execute buttons (and its actions)
 $(document).ready(function() {
   $('.executor').each(function(i, element) {
-    var runButton = $(element).find('label').prepend('<span class="glyphicon glyphicon-play"></span>');
+    $(element).find('label').prepend('<span class="glyphicon glyphicon-play"></span>');
+    var runButton = $(element).find('label span');
 
     runButton.click(function() {
       var input = $(element).find('pre');
@@ -35,6 +36,14 @@ $(document).ready(function() {
       catch (e) {
         outputPre.html(e.toString());
       }
+    });
+
+    // Add "run in tester" button
+    $(element).find('label').append('<a class="btn btn-xs btn-info">In Tester kopieren</a>');
+    var runTesterButton = $(element).find('label a');
+    runTesterButton.click(function() {
+      var input = $(element).find('pre');
+      openTesterWindow(input.data('code'));
     });
   });
 });
