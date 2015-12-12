@@ -41,8 +41,32 @@ p.
 
 div.alert.alert-warning Bei Vergleichen muss <strong>immer</strong> der <code>==</code>-Operator verwendet werden. Ein einzelnes Gleichheitszeichen <code>=</code> wird <strong>nur</strong> bei Zuweisungen verwendet!
 
-// TODO: Tabelle zu Vergleichsoperatoren
-
+h3 Vergleichsoperatoren
+table.table.table-striped
+  thead
+    tr
+      th Vergleichsoperator
+      th Beschreibung
+  tbody
+    tr
+      td a == b
+      td Prüft a und b auf Gleichheit, <strong>true</strong> falls gleich, <strong>false</strong> andernfalls
+    tr
+      td a ~= b
+      td Prüft a und b auf Ungleichheit
+    tr
+      td a < b
+      td Wahr, wenn a (echt) kleiner als b ist
+    tr
+      td a <= b
+      td Wahr, wenn a kleiner oder gleich b ist
+    tr
+      td a > b
+      td Wahr, wenn a (echt) größer als b ist
+    tr
+      td a >= b
+      td Wahr, wenn a größer oder gleich b ist
+      
 h3 if-else
 p Für if gibt es noch eine kleine Erweiterung: Den else-Block. Dieser Block wird ausgeführt, wenn die Bedingung zwischen <code>if</code> und <code>then</code> <strong>nicht</strong> nicht wahr ist.
 

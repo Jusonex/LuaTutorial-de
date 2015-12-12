@@ -26,7 +26,9 @@ div.executor
 
 h3 Die String Bibliothek
 p.
-  Darüber hinaus ist es oft wünschenswert Strings nicht nur aneinander zu reihen oder zu definieren, sondern auch z.B. die Länge von Strings zu ermitteln oder einen Teilstring zu bekommen.
+  Darüber hinaus ist es oft wünschenswert Strings nicht nur aneinander zu reihen oder zu definieren, sondern auch z.B. die Länge von Strings zu ermitteln oder einen Teilstring zu bekommen.<br/>
+  In den folgenden Beispielen wird der <code>.</code>-Operator verwendet. Die genaue Bedeutung wird erst im Kapitel <i>Tables</i> erläutert, zur Vereinfachung kann man an dieser Stelle jedoch sagen,
+  dass der . als Teil des Funktionsnamens gesehen werden kann.
   Hier stichprobenartig ein paar Ausschnitte:
   
 h4 string.sub
@@ -39,3 +41,34 @@ div.executor
     
     -- Nur ersten Teil ausgeben
     print(string.sub(myString, 0, 5))
+
+h4 string.find
+p Mit <code>string.find(meinString, suchwort)</code> lässt sich die Anfangsposition eines Suchwortes in einem String ermitteln.
+
+div.executor
+  label Suchen in Strings mit string.find
+  pre.
+    local myString = "Tomaten sind rot"
+    
+    -- Position von Teilwort "rot" finden
+    local pos = string.find(myString, "rot")
+    print(pos)
+    
+    -- Jetzt mit string.sub den Teil ohne "rot" ausgeben
+    print(string.sub(myString, 0, pos - 1))
+
+h4 string.len
+p Mit <code>string.len(meinString)</code> lässt sich die Länge eines Strings ermitteln.
+
+div.executor
+  label Längen von Strings
+  pre.
+    print("Länge von 'Blub': "..string.len("Blub"))
+
+div.alert.alert-info
+  <strong>Pro tip:</strong> Mit dem <code>#</code>-Operator lässt sich die Länge eines Strings kürzer bestimmen. So ist <code>#meinString</code> äquivalent zu <code>string.len(meinString)</code>
+
+h4 Weiteres
+p.
+  Die String-Bibliothek umfasst noch einige, weitere Funktionen, welche z.B. hier eingesehen werden können:
+  <a href="http://pgl.yoyo.org/luai/i/5.4+String+Manipulation">http://pgl.yoyo.org/luai/i/5.4+String+Manipulation</a>
