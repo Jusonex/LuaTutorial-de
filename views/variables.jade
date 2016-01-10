@@ -78,3 +78,54 @@ block body
     Des Weiteren ist es sinnvoll sich an bestimmte Namenskonventionen zu halten, damit der Code auch von anderen Entwicklern möglichst schnell verstanden werden kann.
     Der wichtigste Punkt ist, dass du deinen Variablen eindeutige und selbsterklärende Namen geben solltest. Weiterhin solltest du überlegen, ob sich später vielleicht Leute aus dem
     internationalen Raum anschließen und dann typischerweise mit englischen Namen arbeiten.
+    
+  h3#exercise Übung
+  h4 Teil 1
+  p Aufgabe dieser Übung ist das Definieren von 4 Variablen (die Namen der Variablen können frei gewählt werden, wenn nicht anders angegeben)
+    ol
+      li Eine Variable soll mit der <strong>ganzen Zahl</strong> <code>-5</code> initialisiert werden
+      li Variable mit dem <strong>Fließkommawert</strong> <code>42.1337</code>
+      li Variable mit dem <strong>String</strong> <code>Mein Name ist Fritz</code>
+      li Variable 4 soll Variable 2 zugewiesen werden und den Namen <code>letzteVariable</code> tragen
+  
+  p Im Anschluss sollen alle 3 Variablen in der angeführten Reihenfolge ausgegeben werden.
+  
+  div.solution
+    div.content
+      div.executor
+        label Lösung: Variablen
+        pre.
+          -- Variablen definieren
+          variable1 = -5
+          variable2 = 42.1337
+          variable3 = "Mein Name ist Fritz" -- auf Anführungszeichen achten!
+          letzteVariable = variable2
+          
+          -- Variablen ausgeben
+          -- print kann zu Testzwecken auch mehrere Variablen gleichzeitig ausgeben
+          print(variable1, variable2, variable3, letzteVariable)
+
+    h4 Teil 2
+    p In dieser Aufgabe werden einige Verständnisfragen gestellt:
+    ol
+      li Welche der folgenden Variablen sind <strong>keine</strong> gültigen Variablennamen?
+        ul
+          li variable1
+          li 1variable
+          li günther
+          li fritz
+          li __
+          li --
+          li print
+      li Gibt es in Lua einen Unterschied zwischen einfachen und doppelten Anführungszeichen?
+          
+    div.solution
+      div.content
+        ol
+          li
+            ul
+              li 1variable, weil eine Zahl am Anfang ist
+              li günther, weil Umlaut enthalten ist
+              li --, nicht erlaubtes Zeichen (da verwendet für Kommentare) - würde im Regelfall jedoch nicht direkt zum Fehler führen, da die Zeile dann auskommentiert ist
+              li print <strong>ist gültig</strong>, jedoch führt das dazu, dass die print-Funktion später nicht mehr funktioniert (weil sie überschrieben wurde)
+          li Nein, in Lua sind beide Notation äquivalent. In anderne Sprachen wie z.B. PHP oder C++ jedoch nicht (wobei sich die Bedeutung bei diesen Sprachen wieder unterscheidet)

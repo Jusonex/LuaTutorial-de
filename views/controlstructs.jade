@@ -145,3 +145,52 @@ block body
       for meinZaehler = 0, 2, 0.5 do
         print(meinZaehler)
       end
+
+  h3#brackets Klammerung
+  p Bedingungen können beliebig geklammert werden, wobei die Anzahl der geschlossenen Klammern mit der Anzahl der geöffneten übereinstimmen muss.
+
+  h3#exercise Übung
+  h4 Teil 1: Verständnisfragen
+  p Im ersten Teil der Übung sollen Verständnisfragen beantwortet werden.
+  ol
+    li Was ist der Unterschied zwischen einer if-Bedingung und einer Schleife?
+    li Was ist der Unterschied zwischen einer for- und while Schleife?
+    li Kann man mit einem Schleifentyp allen anderen Typen darstellen? Falls ja, mit welcher zum Beispiel?
+    
+  div.solution
+    div.content
+      ol
+        li Eine if-Bedingung prüft nur <strong>einmalig</strong> die Bedingung, wohingegen eine Schleife eine Bedingung überprüft und dann einen Vorgang z.B. bis zum Eintreten der Bedingung wiederholt
+        li Eine for-Schleife verwendet immer einen Zähler und zählt bis zum Erreichen eines festgelegten Wertes. Eine while-Schleife führt Code so lange aus bis eine Bedingung nicht mehr eintritt
+        li Ja, z.B. mit der while-Schleife lassen sich alle anderen Schleifen darstellen (siehe Teil 2)
+    
+    
+  h4 Teil 2: Umformen zwischen Schleifentypen
+  p Wie in <i>Teil 1</i> schon angekündigt wurde lassen sich alle Schleifentypen ineinander mehr oder weniger problemlos überführen (wobei die for-Schleife einen Sonderfall darstellt)
+    
+  p In dieser Aufgabe soll nun folgende while-Schleife jeweils in eine repeat-until Schleife und for-Schleife überführt werden:
+  div.executor
+    label Übung: Schleifen
+    pre.
+      i = 50
+      while i ~= -10 do
+        i = i - 2
+        print(i)
+      end
+  
+  div.solution
+    div.content
+      div.executor
+        label Lösung: Schleifen
+        pre.
+          -- repeat-until
+          i = 50
+          repeat
+            i = i - 2
+            print(i)
+          until i == -10
+
+          -- for
+          for i = 50-2, -10, -2 do
+            print(i)
+          end
