@@ -1,3 +1,5 @@
 # LuaTutorial
+Hierbei handelt es sich um ein interaktives Tutorial für die Skriptsprache Lua
 
-a [Sails](http://sailsjs.org) application
+## Lizenz
+Dieses Projekt samt Texten steht unter der GPL v3 Lizenz.
