@@ -48,3 +48,30 @@ block body
     
   div.alert.alert-info
     <strong>Pro tip:</strong> Es können auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
+
+  h3#exercise Übung
+  p In dieser Übung soll eine Funktion geschrieben, die alle Zahlen von 1 bis 1000 einmal mithilfe einer Schleife und einmal mit der <a href="https://de.wikipedia.org/wiki/Gau%C3%9Fsche_Summenformel">Gaußschen Summenformel</a> berechnet.
+  p Die Gaußsche Summenformel ist wie folgt definiert:
+  img(src="/images/gauss.JPG")
+  
+  div.solution
+    div.content
+      div.executor
+        label Übung: Gaußsche Summenformel
+        pre.
+          -- Schleife
+          function sum_loop(n)
+            local result = 0
+            for i = 1, n do
+              result = result + i
+            end
+            return result
+          end
+          
+          -- Gauß
+          function sum_gauss(n)
+            return (n^2 + n)/2
+          end
+          
+          print("Ergebnis Schleife: "..sum_loop(1000))
+          print("Ergebnis Gauß: "..sum_gauss(1000))

@@ -70,9 +70,8 @@ block navigation
         ul
           li: a(href="/beginner/strings#concat") Konkatentation
           li: a(href="/beginner/strings#library") Bibliothek
-          li: a(href="/beginner/strings#exercise") Übung
+          //li: a(href="/beginner/strings#exercise") Übung
         
-    li: a(href="/beginner/libraries") Weitere Lua Bibliotheken
     li: a(href="/beginner/tables") Tables
       if (req.path == "/beginner/tables")
         ul
@@ -80,6 +79,15 @@ block navigation
           li: a(href="/beginner/tables#arrays") Tables als Arrays
           li: a(href="/beginner/tables#maps") Tables als Maps
           li: a(href="/beginner/tables#exercise") Übung
+          
+    li: a(href="/beginner/libraries") Weitere Lua Bibliotheken
+      if (req.path == "/beginner/libraries")
+        ul
+          li: a(href="/beginner/libraries#math") Mathe
+          li: a(href="/beginner/libraries#table") Table
+          li: a(href="/beginner/libraries#os") System (os)
+          li: a(href="/beginner/libraries#io") Eingabe/Ausgabe
+          li: a(href="/beginner/libraries#debug") Debug, Coroutine
   
   //-
     Kapitel:

@@ -2,5 +2,74 @@ extends content
 
 block body
   h1#libraries Weitere Lua Biliotheken
-  // TODO: Zeug hier einfügen
+  p.
+    Lua Bibliotheken sind Erweiterungen für Lua. Die hier angesprochenen Bibliotheken werden in der Standard-Distribution von Lua
+    mitgeliefert. Aus Sicherheitsgründen werden einige Bibliotheken wie die OS-Bibliothek in kritischen Anwendungen jedoch nicht geladen.
+    Alle hier vorgestellten Bibliotheken sind assoziative Tables, die Funktionen enthalten.
+
   // http://pgl.yoyo.org/luai/i/5.6+Mathematical+Functions
+
+  h2#math Mathe
+  p.
+    In vielen Fällen sind komplexere Matheoperationen als <code>+, -, *, /</code> nötig.
+    Dazu stellt Lua die <code>math</code>-Bibliothek bereit.<br/>
+    Da die meisten Funktionen selbsterklärend sind, werden hier nur einige prominente Beispiele aufgezeigt.
+    
+  p Eine vollständige Liste ist hier zu finden: <a href="http://pgl.yoyo.org/luai/i/5.6+Mathematical+Functions">http://pgl.yoyo.org/luai/i/5.6+Mathematical+Functions</a>
+    
+  h4 Winkelfunktionen: math.sin, math.cos, math.tan
+  p Wenn man mit Seiten und Winkeln rechnet, sind trigonometrische Funktionen unerlässlich, daher bringt auch Lua sie mit.
+  p Die umgedrehten/inversen (Arcus) Funktionen tragen das Präfix <i>a</i>. Ein Sonderfall stellt hier <code>math.atan2</code>, welcher das Vorzeichen (also den Quadranten) mit berücksichtigt.
+  p Alle Winkel werden dabei im Bogenmaß (Vielfache von Pi) angegeben, können aber mit der Funktion <code>math.rad</code> umgerechnet werden.
+  
+  div.executor
+    label Trigonometrische Funktionen
+    pre.
+      -- Sinus von 90° berechnen
+      local wert1 = math.sin(math.rad(90))
+      print(wert1)
+
+      -- Sinus von Pi/2 berechnen (entspricht Sinus von 90°)
+      local wert2 = math.sin(math.pi/2)
+      print(wert2)
+
+  h4 Runden
+  p Oft gebraucht werden außerdem häufig Funktionen zum Auf- und Abrunden. <code>math.floor</code> rundet zahlen ab, <code>math.ceil</code> auf.
+  p "Richtig runden" kann Lua von Haus aus nicht, dieses kann aber schnell nachgerüstet werden (zumindest das Runden auf ganze Zahlen)
+
+  div.executor
+    label Runden
+    pre.
+      -- Abrunden
+      print(math.floor(5.7))
+      
+      -- Aufrunden
+      print(math.ceil(5.2))
+      
+      -- Runden
+      function math.round(n)
+        return math.floor(n + 0.5)
+      end
+      print(math.round(5.4))
+      print(math.round(5.6))
+
+  h2#table Table Utils
+  p Hilfreich ist manchmal auch die Table Bibliothek, welche Elemente ans Ende einer Table einfügen oder entfernen kann oder auch Tables sortiert.
+  p Vollständige Liste: <a href="http://pgl.yoyo.org/luai/i/5.5+Table+Manipulation">http://pgl.yoyo.org/luai/i/5.5+Table+Manipulation</a>
+  
+  h2#os System Bibliothek
+  p Zugriffe auf Funktionen des Systems findet man in der <code>os</code>-Bibliothek. Mit <code>os.execute</code> lässt sich bspw. ein beliebiger Befehl auf der Konsole ausführen.
+  p Vollständige Liste: <a hreF="http://pgl.yoyo.org/luai/i/5.8+Operating+System+Facilities">http://pgl.yoyo.org/luai/i/5.8+Operating+System+Facilities</a>
+
+  div.alert.alert-warning Diese Bibliothek wird in den meisten Anwendungen aus Sicherheitsgründen nicht geladen.
+    
+  h2#io Eingabe/Ausgabe
+  p.
+    Wenn man mit dem Standalone-Interpreter von Lua arbeitet, möchte man i.d.R. auch Eingaben vom Benutzer akzeptieren oder Dateien speichern oder auslesen.
+    Dies ist mit der io-Bibliothek möglich.
+
+  p Vollständige Liste: <a href="http://pgl.yoyo.org/luai/i/5.7+Input+and+Output+Facilities">http://pgl.yoyo.org/luai/i/5.7+Input+and+Output+Facilities</a>
+  div.alert.alert-warning Diese Bibliothek wird bei vielen Anwendungen aus Sicherheitsgründen nicht geladen, da sie standardmäßig uneingeschränkten Zugriff auf das Dateisystem erlaubt.
+
+  h2#debug debug, coroutine
+  p Es gibt noch 2 weitere Bibliotheken, die etwas komplizierter sind und daher erst im fortgeschrittenen Tutorial diskutiert werden.
