@@ -56,4 +56,5 @@ module.exports.routes = {
   '/beginner/strings': {view: 'strings'},
   '/beginner/libraries': {view: 'libraries'},
   '/beginner/tables': {view: 'tables'},
+  '/beginner/summary_feedback': {view: 'summary_feedback'},
 };

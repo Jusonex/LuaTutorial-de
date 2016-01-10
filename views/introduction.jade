@@ -3,33 +3,51 @@ extends content
 block body
   h1#introduction Einleitung
   p.
-    Hallo,
-    dieses Tutorial soll die Skriptsprache von verschiedenen Seiten beleuchten.
+    Ziel dieses Tutorial ist die Skriptsprache Lua von verschiedenen Seiten beleuchten (nicht 'LUA', sonst riskiert ihr das Risiko auf einem IRC gebannt zu werden).
     
   h3#audience Zielgruppe
   p.
-    Die Zielgruppe dieses Tutorials sind sowohl blutige Anfänger als auch fortgeschrittene Leute, die bereits Erfahrung mit Lua haben und Hilfe zu fortgeschrittenen Themen
-    wie Objektorientierung in Lua, Metatables u.ä. suchen.
-    Dieses Tutorial bezieht sich vor allem auf eingebettetes Lua in unsicheren Umgebungen (e.g. Computerspielen)
+    Die Zielgruppe dieses Tutorials sind sowohl blutige Anfänger als auch fortgeschrittene Personen, die bereits Erfahrung mit Lua haben und Hilfe zu fortgeschrittenen Themen
+    wie Objektorientierung in Lua, Metatables u.ä. suchen oder das Tutorial nur als Nachschlagewerk benutzen wollen.
+  
+  p Dieses Tutorial bezieht sich im ersten Teil nur auf die Sprache Lua im Allgemeinen ohne spezielle, eigene Umgebungen zu betrachten (wie z.B. Einbettung in Editoren, Computerspiele etc.).
     
-  h3#sources Quellen
+  h3#sources Quellen und Bibliotheken
+  h4 Quellen
   ul
     li: a(href="https://de.wikipedia.org/wiki/Lua") https://de.wikipedia.org/wiki/Lua
+    li: a(href="http://pgl.yoyo.org/luai/i/about") http://pgl.yoyo.org/luai/i/about
+    
+  h4 Bibliotheken
+  ul
     li: a(href="https://github.com/isagalaev/highlight.js") https://github.com/isagalaev/highlight.js
+    li: a(href="https://kripken.github.io/lua.vm.js/lua.vm.js.html") https://kripken.github.io/lua.vm.js/lua.vm.js.html
+    li: a(href="http://getbootstrap.com/") http://getbootstrap.com/
+    li: a(href="https://jquery.com/") https://jquery.com/
+    li: a(href="http://sailsjs.org/") http://sailsjs.org/
+    li: a(href="https://nodejs.org/en/") https://nodejs.org/en/
   
   h3#whatislua Was ist Lua?
   p.
     Lua (portugiesisch für <i>Mond</i>) ist eine Skriptsprache, die 1993 von der <i>Computer Graphics Technology Group</i> der Päpstlichen Katholischen Unversität von Rio de Janeiro in Brasilien entwickelt wurde.
     <br/><br/>
-    Sie zeichnet sich insbesondere dudurch aus, dass sie sich sehr leicht einbetten lässt und bei den Sprachfeatures auf das wesentliche beschränkt.
+    Sie zeichnet sich insbesondere dudurch aus, dass sie sich sehr leicht einbetten lässt und bei den Sprachfeatures auf das Wesentliche beschränkt.
     Dadurch ist sie insbesondere für Programmieranfänger leicht zu erlernen.
     
   h3#thistutorial Was zeichnet dieses Tutorial aus?
   p.
-    Das besondere an diesem Tutorial ist, dass nicht nur gelesen wird, sondern der Leser selbst an verschiedenen Stellen Codeschnipsel im Browser ausprobieren kann.
-    Verwendet wird dazu eine reine Browserimplentierung (<a href="https://github.com/kripken/lua.vm.js">Klick mich</a>)
+    Das Besondere an diesem Tutorial ist, dass nicht nur gelesen wird, sondern der Leser selbst an verschiedenen Stellen Codeschnipsel im Browser ausprobieren kann.
+    Verwendet wird dazu eine reine Browserimplentierung (<a href="https://github.com/kripken/lua.vm.js">Klick mich</a>). An dieser Stelle einen großen Dank an den Entwickler.<br/>
+    Unterstützt wird das Ganze durch Übungen zu jedem Kapitel, in denen das gerlente Wissen angewendet werden kann.
 
   h3#howtoread Wie dieses Tutorial zu lesen ist?!
   p.
     Zu jedem Teilkapitel gibt es ein oder mehrere Codebeispiele, die, wie oben erwähnt, mit einem Klick auf den Play-Button ausprobiert werden können.
     Du solltest dir jedoch zur Übung vorher überlegen, welche Ausgabe das Skript erzeugen wird und erst dann auf den Button klicken.
+    
+  p.
+    Darüber hinaus du zu unten rechts in der Ecke einen Button mit der Aufschrift "Tester". Dort kannst du z.B. deine Lösung der Übung eingeben und direkt testen.
+    Weiterhin ist jedes Codebeispiel mit einem "In Tester kopieren" Button ausgestattet, sodass du jedes Beispiel nochmals leicht verändern kannst.
+    
+  h3 Status dieses Tutorials
+  p Dieses Tutorial befindet sich noch in der Anfangsversion und enthält daher zwangsläufig einige Fehler. Daher freue ich mich, wenn du Fehler wie <a href="/beginner/summary_feedback">hier</a> beschrieben, meldest.

@@ -4,7 +4,7 @@ block body
   h1#variables Variablen und Datentypen
   h3#vars Variablen
   p.
-    Variablen sollten für die meisten schon aus der Mathematik bekannt sein. In der Programmierung lässt sich ein Variable als Platzhalter für einen bestimmten Inhalt sehen.
+    Variablen sollten für die meisten aus der Mathematik bereits bekannt sein. In der Programmierung lässt sich eine Variable als Platzhalter für einen bestimmten Inhalt sehen.
     <br/>
     So lässt sich sagen: Eine Variable ordnet einem <strong>Wert</strong> einen <strong>Namen</strong> zu.
 
@@ -29,9 +29,9 @@ block body
   h4 Zahlen
   p.
     Lua benutzt für alle Zahlen sogenannte <i>Fließkommazahlen doppelter Genauigkeit</i>, d.h. du musst dir keine Sorgen über zu kleine Wertebereiche machen (das bedeutet jedoch nicht,
-    dass eine Zahl beliebig groß sein kann). Dezimalzahlen mit einem Komma müssen statt eines Dezimalkommas jedoch einen Dezimalpunkt verwenden
+    dass eine Zahl beliebig groß sein kann). Dezimalzahlen mit einem Komma müssen statt eines Dezimalkommas jedoch einen Dezimalpunkt verwenden.<br/><br/>
     
-    Zahlen können ganz einfach definiert werden:
+    Zahlen können ganz einfach wie folgt definiert werden:
     
   div.executor
     label Variablen: Zahlen
@@ -73,11 +73,12 @@ block body
     ul
       li ...nur aus ASCII Zeichen bestehen (d.h. Sonderzeichen und Umlaute sind <strong>nicht</strong> erlaubt)
       li ...nicht mit einer Zahl anfangen (muss also mit einem Buchstaben anfangen)
+      li ...nicht ausschließlich den Namen eines Lua Schlüsselworts tragen (z.B. end, for, while, ...)
 
   p.
     Des Weiteren ist es sinnvoll sich an bestimmte Namenskonventionen zu halten, damit der Code auch von anderen Entwicklern möglichst schnell verstanden werden kann.
-    Der wichtigste Punkt ist, dass du deinen Variablen eindeutige und selbsterklärende Namen geben solltest. Weiterhin solltest du überlegen, ob sich später vielleicht Leute aus dem
-    internationalen Raum anschließen und dann typischerweise mit englischen Namen arbeiten.
+    Der wichtigste Punkt ist, dass du deinen Variablen eindeutige und selbsterklärende Namen geben solltest. Weiterhin solltest du überlegen, ob sich später vielleicht Personen aus dem
+    internationalen Raum anschließen und dann typischerweise mit einer englischen Namensgebung und Kommentaren arbeiten.
     
   h3#exercise Übung
   h4 Teil 1

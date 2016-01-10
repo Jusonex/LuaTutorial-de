@@ -4,7 +4,7 @@ block body
   h1#blocks Blöcke und Gültigkeitsbereiche
   h3#motivation Motivation
   p.
-    Variablen sind eine schöne Sache, bei größeren Skripten (die schon mal locker mehrere 1000 Variablennamen haben) müsste man sich schon eine besondere Konvention wie
+    Variablen sind eine schöne Sache; bei größeren Skripten (die schon mal locker mehrere 1000 Variablennamen haben könnne) müsste man sich schon eine besondere Konvention wie
     <i>meinZaehler1, meinZaehler2, meinZaehler3, ...</i> überlegen, um Namenskonflikte zu vermeiden.
     Bei noch mehr Variablen geht das auf die Dauer natürlich schief.<br/>
     Dies ist ein Grund dafür, dass man Gültigkeitsbereiche und sog. lokale Variablen eingeführt hat (ein anderer Grund ist Speichereffizienz)
@@ -12,17 +12,17 @@ block body
   h3#block Was ist ein Block?
   p.
     Ein Block ist der Code zwischen dem <code>then</code> und <code>end</code> einer if-Bedingung oder der Code zwischen dem <code>do</code> und <code>end</code> einer Schleife.
-    In diesem Tutorial sind neue Blöcke immer eingerückt (d.h. um ein paar Leerzeichen versetzt), um die Übersicht zu steigern.
-    Dies ist auch generell so üblich und sollte immer gemacht werden.
+    In diesem Tutorial sind neue Blöcke immer eingerückt (d.h. um ein paar Tabs oder Leerzeichen versetzt), um die Übersicht zu steigern.
+    Dies ist auch generell so üblich und daher eingehalten werden.
 
   h3#scopes Gültigkeitsbereiche
   p.
-    Gültigkeitsbereiche sind die Bereiche, in denen eine lokale Variable gültig ist.
+    Gültigkeitsbereiche (engl. <strong>Scope</strong>) sind die Bereiche, in denen eine lokale Variable gültig ist.
     
   h3#localvars Lokale Variablen
   p.
     Lokale Variablen sind nur in ihrem Gültigkeitsbereich, ihrem Block gültig und werden nach Verlassen des Blocks im Regelfall gelöscht.
-    Sie werden mit dem Schlüsselwort <code>local</code> vor dem Variablennamen definiert
+    Sie werden mit dem Schlüsselwort <code>local</code> vor dem Variablennamen definiert.
   
   div.executor
     label Lokale Variablen
@@ -41,7 +41,7 @@ block body
       print(b)
   
   h3#definition Definition von Blöcken
-  p Blöche lassen sich auch ohne Kontrollstrukturen definieren. In der Praxis sieht man dies jedoch eher selten.
+  p Blöcke lassen sich auch ohne Kontrollstrukturen definieren. In der Praxis sieht man dies jedoch eher selten.
   pre.
     -- Block einleiten
     do

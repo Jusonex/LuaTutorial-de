@@ -89,6 +89,12 @@ block navigation
           li: a(href="/beginner/libraries#io") Eingabe/Ausgabe
           li: a(href="/beginner/libraries#debug") Debug, Coroutine
   
+    li: a(href="/beginner/summary_feedback") Zusammenfassung & Feedback
+      if (req.path == "/beginner/summary_feedback")
+        ul
+          li: a(href="/beginner/summary_feedback#summary") Zusammenfassung
+          li: a(href="/beginner/summary_feedback#feedback") Feedback
+          
   //-
     Kapitel:
     - Syntax & Semantik
