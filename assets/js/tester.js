@@ -30,16 +30,20 @@ $(document).ready(function() {
 });
 
 function openTesterWindow(code) {
-  currentCode = code;
+  if (code)
+    currentCode = code;
+
   setTesterWindowOutput('');
 
   $('#testerButton').fadeOut(function() {
-    $('#testerWindow textarea').val(code || '');
+    $('#testerWindow textarea').val(currentCode);
     $('#testerWindow').fadeIn();
   });
 }
 
 function closeTesterWindow() {
+  currentCode = $('#testerWindow textarea').val();
+
   $('#testerWindow').fadeOut(function() {
     $('#testerButton').fadeIn();
   })
