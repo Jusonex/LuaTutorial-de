@@ -50,28 +50,46 @@ block body
     <strong>Pro tip:</strong> Es können auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
 
   h3#exercise Übung
-  p In dieser Übung soll eine Funktion geschrieben, die alle Zahlen von 1 bis 1000 einmal mithilfe einer Schleife und einmal mit der <a href="https://de.wikipedia.org/wiki/Gau%C3%9Fsche_Summenformel">Gaußschen Summenformel</a> berechnet.
-  p Die Gaußsche Summenformel ist wie folgt definiert:
-  img(src="/images/gauss.JPG")
+  h4 Teil 1
+  p In dieser Aufgabe soll eine Funktion geschrieben werden, die 2 beliebige Variablen (Zahlen) als Parameter der Funktion <i>a</i> und <i>b</i> addiert, anschließend mit 2 multipliziert und zurückgibt.
+  div.solution
+    div.content
+      div.executor
+        label Einfache Funktion
+        pre.
+          -- Funktion mit 2 Paramtetern a und b definieren
+          function addAndMultiply(a, b)
+            -- Da a + b zuerst gerechnet werden soll und Punkt vor Strichrechnung gilt, muss a + b geklammert werden
+            return (a + b) * 2
+          end
+          
+          -- Funktion aufrufen (Test) und Ergebnis ausgeben
+          print(addAndMultiply(2, 3)) -- erwartetes Ergebnis (2 + 3)*2 = 5*2 = 10
+  
+  h4 Teil 2
+  p.
+    In dieser Aufgabe sollen mehrere Elemente geübt werden. Dazu wird folgende Situation angenommen: Wir entwickeln ein Computerspiel und müssen dazu eine Funktion namens "checkGateAccess" für ein Tor schreiben,
+    das nur für bestimmte Spielernamen auf geht.
+    Durch den Rest des Scriptes ist vorgegeben, dass das Tor nur auf geht, wenn unsere Funktion den Wahrheitswert <code>true</code>, also wahr, zurückgibt.
+    Anschließend soll die Funktion mit den Namen "Harry", "Günther", "Fritz" und "Shantal" getestet werden, wobei nur "Fritz" und "Shantal" das Tor öffnen können.
   
   div.solution
     div.content
       div.executor
-        label Übung: Gaußsche Summenformel
+        label Eine Torfunktion
         pre.
-          -- Schleife
-          function sum_loop(n)
-            local result = 0
-            for i = 1, n do
-              result = result + i
+          function checkGateAccess(name)
+            if name == "Fritz" or name == "Shantal" then
+              print("Tor auf")
+              return true
+            else
+              print("Tor zu")
+              return false
             end
-            return result
           end
-          
-          -- Gauß
-          function sum_gauss(n)
-            return (n^2 + n)/2
-          end
-          
-          print("Ergebnis Schleife: "..sum_loop(1000))
-          print("Ergebnis Gauß: "..sum_gauss(1000))
+
+          -- Testen
+          print(checkGateAccess("Harry"))
+          print(checkGateAccess("Günther"))
+          print(checkGateAccess("Fritz"))
+          print(checkGateAccess("Shantal"))

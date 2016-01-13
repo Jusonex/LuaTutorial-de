@@ -52,24 +52,57 @@ block body
         th Beschreibung
     tbody
       tr
-        td a == b
+        td a <code>==</code> b
         td Prüft a und b auf Gleichheit, <strong>true</strong> falls gleich, <strong>false</strong> andernfalls
       tr
-        td a ~= b
+        td a <code>~=</code> b
         td Prüft a und b auf Ungleichheit
       tr
-        td a < b
+        td a <code><</code> b
         td Wahr, wenn a (echt) kleiner als b ist
       tr
-        td a <= b
+        td a <code><=</code> b
         td Wahr, wenn a kleiner oder gleich b ist
       tr
-        td a > b
+        td a <code>></code> b
         td Wahr, wenn a (echt) größer als b ist
       tr
-        td a >= b
+        td a <code>>=</code> b
         td Wahr, wenn a größer oder gleich b ist
         
+  h3#junctors Logische Junktoren
+  P Es reicht meistens nicht nur eine einzelne Sachen abzufragen. Man möchte oft mehrere einzelne Abfragen miteinander verknüpfen.
+  
+  table.table.table-striped
+    thead
+      tr
+        th Junktor
+        th Beschreibung
+    tbody
+      tr
+        td a <code>and</code> b
+        td Prüft, ob wohl a <strong>als auch b</strong> wahr sind
+      tr
+        td a <code>or</code> b
+        td Prüft a oder b wahr ist
+      tr
+        td <code>not</code> a
+        td Negiert a, d.h. <code>true</code> wird zu <code>false</code> und <code>false</code> zu <code>true</code>
+        
+  p Folgendes Beispiel überprüft, ob sowohl a den Wert 2 als auch b den Wert 3 hat
+  div.executor
+    label Junktoren
+    pre.
+      -- a und b definieren
+      local a = 2
+      local b = 4
+      
+      if a == 2 and b == 3 then -- erster Ausdruck wird wahr sein, zweiter nicht
+        print("a ist 2 und b ist 3")
+      else
+        print("Gilt nicht")
+      end
+  
   h3#ifelse if-else
   p Für if gibt es noch eine kleine Erweiterung: Den else-Block. Dieser Block wird ausgeführt, wenn die Bedingung zwischen <code>if</code> und <code>then</code> <strong>nicht</strong> nicht wahr ist.
   // TODO: Add elseif
