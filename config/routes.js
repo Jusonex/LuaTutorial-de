@@ -44,15 +44,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/beginner/introduction': {view: 'introduction'},
-  '/beginner/hello_world': {view: 'hello_world'},
-  '/beginner/comments': {view: 'comments'},
-  '/beginner/variables': {view: 'variables'},
-  '/beginner/controlstructs': {view: 'controlstructs'},
-  '/beginner/blocks': {view: 'blocks'},
-  '/beginner/functions': {view: 'functions'},
-  '/beginner/strings': {view: 'strings'},
-  '/beginner/libraries': {view: 'libraries'},
-  '/beginner/tables': {view: 'tables'},
-  '/beginner/summary_feedback': {view: 'summary_feedback'},
+  '/beginner/introduction': {view: 'beginner/introduction'},
+  '/beginner/hello_world': {view: 'beginner/hello_world'},
+  '/beginner/comments': {view: 'beginner/comments'},
+  '/beginner/variables': {view: 'beginner/variables'},
+  '/beginner/controlstructs': {view: 'beginner/controlstructs'},
+  '/beginner/blocks': {view: 'beginner/blocks'},
+  '/beginner/functions': {view: 'beginner/functions'},
+  '/beginner/strings': {view: 'beginner/strings'},
+  '/beginner/libraries': {view: 'beginner/libraries'},
+  '/beginner/tables': {view: 'beginner/tables'},
+  '/beginner/summary_feedback': {view: 'beginner/summary_feedback'},
 };
