@@ -55,4 +55,8 @@ module.exports.routes = {
   '/beginner/libraries': {view: 'beginner/libraries'},
   '/beginner/tables': {view: 'beginner/tables'},
   '/beginner/summary_feedback': {view: 'beginner/summary_feedback'},
+
+  '/advanced': {view: 'advanced/introduction'},
+  '/advanced/introduction': {view: 'advanced/introduction'},
+  '/advanced/tables': {view: 'advanced/tables'},
 };

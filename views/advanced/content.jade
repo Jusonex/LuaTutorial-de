@@ -1,0 +1,17 @@
+extends ../layout
+
+block navigation
+  ul.nav.nav-pills.nav-stacked
+    li: a(href="/advanced/introduction") Einleitung
+      if (req.path == "/advanced/introduction" || req.path == "/advanced")
+        ul
+          li: a(href="/beginner/introduction#audience") Zielgruppe
+          li: a(href="/beginner/introduction#sources") Quellen
+          
+    li: a(href="/advanced/tables") Tables
+      if (req.path == "/advanced/tables")
+        ul
+          li: a(href="/advanced/tables#motivation") Motivation
+          li: a(href="/advanced/tables#simplify") Vereinfachungen
+          li: a(href="/advanced/tables#usefulfuncs") Nützliche Funktionen
+          li: a(href="/advanced/tables#internal") Internas & Performance

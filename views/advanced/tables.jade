@@ -1,0 +1,191 @@
+extends content
+
+block body
+  h1 Tables
+  h2#motivation Motivation
+  p.
+    Nachdem du dich nun einige Zeit mit Lua beschäftigt hast, wirst du festgestellt haben wie nützlich Tables sein können.
+    Das ist aber noch nicht alles! Tables sind ein weitaus mächtigeres Werkzeug als nur die Verwendung als Arrays und Maps (die meiste Flexibilität wird aber erst im Kapitel 'Metatables' eingeführt).
+    
+  p.
+    Dies ist auch eine Besonderheit von Lua. Kaum eine andere Sprache hat einen so flexiblen Datentyp wie Lua mit dem Konzept der Tables.
+    Diese Flexibilität lässt sich sogar soweit ausnutzen, dass der Code nicht mehr als Lua Code erkennbar ist (davon könnten starre Sprachen wie Java nur träumen!).
+    Jedoch sollte man diese Funktionen mit Bedacht anwenden, da sie unter Umständen den Code sogar unübersichtlicher oder fehleranfälliger machen.
+
+  p.
+    Das Ziel dieses Kapitels soll sein, einige Grundlagen zu klären, die für die nächsten Kapitel notwendig sein werden.
+
+  h2#simplify Einige Syntaxvereinfachungen
+  p Da Tables so dynamisch genutzt werden, bietet es sich gut an einige Vereinfachungen zuzulassen, um den Code übersichtlicher zu machen (wobei alle folgenden Vereinfachungen im Ergebnis äquivalent sind).
+
+  h3 Eckige Klammern bei Strings weglassen
+  p.
+    Bei Initialiserung einer Table können die eckigen Klammern innerhalb der geschweiften Klammern der Tabledefinition weggelassen werden, wenn der Index ein String ist.
+    So sind folgende 2 Definitionen äquivalent
+    
+  div.executor
+    label Eckige Klammern weglassen
+    pre.
+      -- Äquivalente Definition
+      local t1 = {["key1"] = 1, ["key2"] = 2, ["key3"] = 42}
+      local t2 = {key1 = 1, key2 = 2, key3 = 42}
+      
+      -- Ausgeben
+      for k, v in pairs(t1) do
+        print(k, v)
+      end
+      print("")
+      for k, v in pairs(t2) do
+        print(k, v)
+      end
+
+  p.
+    Die zweite Variante ist nicht nur deutlich übersichtlicher, sondern auch noch kürzer. Anzumerken ist dabei jedoch noch,
+    dass die Indizes/Schlüssel (Strings) die Voraussetzungen für Variablennamen erfüllen müssen (also z.B. nicht mit einer Zahl anfangen dürfen).
+    Dies gilt jedoch nur für die kurze Notation; in der Notation mit eckigen Klammern sind beliebige Strings erlaubt.
+
+  h3 <code>.</code>-Operator
+  p Nun wäre es schade, wenn man die Notation ohne eckige Klammern auch bei Zuweisungen von Elementen nutzen könnte. Mit dem <code>.</code>-Operator wird dies möglich:
+    
+  div.executor
+    label <code>.</code>-Operator
+    pre.
+      -- Leere Table definieren
+      local tab = {}
+        
+      -- Element mit herkömmlicher Notation einfügen
+      tab["key1"] = 1
+      
+      -- Element mit .-Operator einfügen
+      tab.key2 = 2
+      
+      -- Folgendes ist nicht erlaubt
+      -- (daher auskommentiert, kann aber im Tester ausgeführt werden, um den Fehler zu sehen)
+      -- tab.2key3 = 42
+      
+      -- Ausgeben (andersherum)
+      print(tab.key1)
+      print(tab["key2"])
+
+  h2#usefulfuncs Nützliche Funktionen
+  h3 Entpacken mit <code>unpack</code>
+  p Manchmal ergeben sich folgende Konstrukte
+  div.executor
+    label Eingepackt
+    pre.
+      local tab = {{"harry", 42}, {"fritz", 13}, {"guenther", 29}}
+      
+      for k, pair in pairs(tab) do
+        print(pair[1], pair[2])
+      end
+      
+  p Bei diesem Beispiel weiß niemand ohne nachzugucken, was <code>pair[1]</code> bedeutet. Die <code>unpack</code>-Funktion schafft Abhilfe.
+  div.executor
+    label unpack
+    pre.
+      local tab = {{"harry", 42}, {"fritz", 13}, {"guenther", 29}}
+      
+      for k, pair in pairs(tab) do
+        local name, age = unpack(pair)
+        print(name, age)
+      end
+    
+  p Viel übersichtlicher, oder? Dabei gibt die unpack Funktion die Elemente der Table solange ab Index 1 zurück bis ein Wert <code>nil</code> wird.
+
+  h3 Einfügen mit <code>table.insert</code>
+  p.
+    <code>table.insert(table, pos, value)</code> ist für die Verwendung von Tables als <strong>Arrays</strong> gedacht. Die Situation ist dabei, dass man ein Element mitten im Array einfügen will und alle
+    folgenden Werte einen Index nach hinten rutschen sollen.
+    
+  div.executor
+    label table.insert
+    pre.
+      -- Table initialisieren
+      local tab = {1, 2, 3, 4, 5, 6}
+      
+      -- Element zwischen 3 und 4 einfügen
+      table.insert(tab, 3, "ichGehoereHierNichtHin")
+      
+      -- Ausgeben
+      for k, v in pairs(tab) do
+        print(k, v)
+      end
+
+  h2#internal Internas und Performance
+  p Um Tables richtig einzusetzen und Performance beurteilen zu können, ist es notwendig zumindest ein grobes Verständnis zu haben, was unter der Haube passiert.
+    
+  p.
+    Die interne Repräsentation von Arrays ist trivial: Bei reinen Arrays (die Lua nicht hat) wird einfach ein zusammenhängender Speicherblock bereitgestellt und mit Werten gefüllt.
+    Dabei kann nur ein numerischer Index (eine Zahl im Bereich der Größe) genutzt werden, damit die genaue Position im Speicher errechnet werden kann.
+    
+  // TODO: Bild zur Verdeutlichung einfügen
+  
+  p.
+    Mit reinen Arrays ist es nur schwierig einem Wert (der keine Zahl ist) einen anderen zuzuordnen und diesen dann auch noch in einer angemessenen Zeit zu finden. Eine gierige Implementierung
+    eines solchen Suchalgorithmus sähe z.B. so aus:
+    
+  p Im Beispiel werden zur Schlüssel-Wert Zuordnung verschachtelte Tables als Paare genutzt (hier: Namen einem Alter zuordnen).
+    
+  div.executor
+    label Greedy-Suche
+    pre.
+      -- Array definieren (es dürfen keine anderen Typen als Zahlen als Index verwendet werden)
+      local tab = {{"harry", 42}, {"fritz", 13}, {"guenther", 29}}
+      
+      -- Alter von harry finden
+      for k, pair in pairs(tab) do
+        if pair[1] == "harry" then
+          print("Harrys Alter ist: "..pair[2])
+        end
+      end
+      
+  p.
+    Hierbei wird jedes Element des Arrays besucht und geprüft, ob es sich um den angegebenen Namen handelt.
+    Bei großen Datenmengen kann das schon etwas länger dauern.
+    
+  h3 Lösungsansatz
+  p.
+    Damit die Suche nach einem Element schneller geht, haben sich schlaue Leute Abhilfen überlegt. Die Abhilfe, die Lua nutzt, sind sog. Hashtabellen.
+    Die Idee hinter Hashtabellen ist im Wesentlichen, dass man versucht die Position des Elements nicht zu suchen, sondern sie zu <i>wissen</i>.
+    Dabei wird ausgenutzt, dass fast nie jede Kombinationsmöglichkeit z.B. eines Strings als Schlüssel verwendet wird, sondern die Werte weit gestreut sind.
+    
+  p.
+    Dies führt zu der Idee, dass man eine sich wiederholende mathematische Funktion nutzt, um diese Streuung zu erzeugen. Solche Funktionen können z.B. über den sog. Modulo-Operator erzeugt werden.
+    Die Modulo-Operation berechnet den Rest der Division und wird in Lua durch das <code>%</code>-Zeichen ausgedrückt.
+    
+  div.executor
+    label Hashfunktion / Modulo-Operation
+    pre.
+      function hashfunc(n)
+        -- Berechnet den Rest der Division durch 3
+        return n % 3
+      end
+      
+      -- Einige Funktionswerte berechnen
+      for i = 0, 10 do
+        print(i, hashfunc(i))
+      end
+
+  p.
+    Offensichtlich ist nun, dass diese Hashfunktion eine große Eingabemenge (hier die Menge von 0 bis 10) auf eine kleinere Menge aus 3 Elementen (0, 1, 2) abbildet.
+    Die Elemente dieser kleinen Menge lassen sich dann nutzen, um die Position in einem zu Grunde liegenden Array zu berechnen.
+    Da die Werte sich wiederholen, bilden natürlich mehrere Werte der Eingabemenge auf die Ausgabemenge ab. Wenn so ein Element erwischt wird, entsteht eine sog. <strong>Hashkollision</strong>,
+    die aber durch verschiedene Methoden ausgeglichen werden kann (Stichwörter für Suchmaschinen: Sondieren, Doppelhashing, dynamische Hashfunktion).
+
+  div.alert.alert-info.
+    <strong>Pro tip:</strong> Diese Hashkollision werden bei Algorithmen wie <i>md5</i> oder <i>sha-2</i> wiederum ausgenutzt, um Passwörter so zu speichern, dass sie (möglichst) nicht direkt zur originalen Eingabe zurückführen.
+  
+  p.
+    Wenn eine (ausreichend) gute Hashfunktion gefunden wird, werden Elemente quasi gar nicht gesucht, sondern direkt gefunden, sodass die Laufzeit im Idealfall unabhängig
+    von der Größe der Table ist.
+
+  h3 Folgerung
+  p.
+    Wenn du den letzten Abschnitt nicht vollkommen verstanden hast, ist das nicht schlimm. Wichtig ist das, was jetzt gefolgert wird:<br/>
+    Dadurch, dass wir nun eine Möglichkeit gefunden haben bestenfalls in konstanter Zeit ein Element zu finden, sind ist folgendes Beispiel nahezu immer schneller als die gierige Algorithmus von oben.
+    
+  div.executor
+    label Schneller mit Hashtables
+    pre.
+      local tab = {["harry"] = 42, ["fritz"] = 13, ["guenther"] = 29}
+      print("Harrys Alter ist: "..tab["harry"])
