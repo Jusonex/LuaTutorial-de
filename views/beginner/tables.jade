@@ -77,6 +77,7 @@ block body
 
   div.alert.alert-info
     <strong>Pro tip:</strong> Um die Anzahl der Element in einer Table zu ermitteln, kann ähnlich wie bei Strings der <code>#</code>-Operator verwendet werden.
+    | Aber Achtung: Dies funktioniert nur, wenn die Table als Array verwendet wird (d.h. eine durchgehende Indizes aufweist, die bei 1 starten).
 
   div.executor
     label Neue Monate - das geht!
@@ -183,8 +184,32 @@ block body
     <code>pairs</code> ist dabei die Funktion, die das eigentliche Verhalten des "durchgehen" definiert und einen sogenannten <strong>Iterator</strong> zurückgibt.
     
   p.
-    Iterationen sind jedoch ein etwas komplizierteres Thema und werden deshalb erst im Tutorial für Fortgeschrittene erläutert. Für jetzt reicht es zu wissen, dass <code>pairs</code>
+    Iteratoren sind jedoch ein etwas komplizierteres Thema und werden deshalb erst im Tutorial für Fortgeschrittene erläutert. Für jetzt reicht es zu wissen, dass <code>pairs</code>
     zusammen mit der generischen for-Schleife (<code>for ... in</code>), um eine Table durchzuiterieren.
 
   div.alert.alert-info
     <strong>Pro tip:</strong> Natürlich lassen sich auch Tables als Arrays/Listen mit der generischen for-Schleife auf exakt dem gleichen Weg durchgehen.
+
+  h4 Anzahl der Elemente einer Table ermitteln
+  p.
+    Wie oben schon beschrieben, lässt sich der <code>#</code>-Operator leider nur für durchgehend indizierte Tables (also Arrays) verwenden.
+    Da aber jetzt bekannt ist wie die generische for-Schleife funktioniert, kann man sich nun leicht eine Funktion zum Ermitteln der Länge bauen:
+    
+  div.executor
+    label Anzahl der Elemente einer Table
+    pre.
+      function table.length(tab)
+        local count = 0
+        for k, v in pairs(tab) do
+          count = count + 1
+        end
+        return count
+      end
+      
+      -- Test
+      local playerIDs = {
+        ["Spielername1"] = 42,
+        ["Spielername2"] = 1337,
+        ["Spieler1337"] = "DerHatKeineID"
+      }
+      print("Anzahl der Elemente: "..table.length(playerIDs))

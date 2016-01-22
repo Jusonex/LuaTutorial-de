@@ -28,15 +28,15 @@ block body
 
   h4 Zahlen
   p.
-    Lua benutzt für alle Zahlen sogenannte <i>Fließkommazahlen doppelter Genauigkeit</i>, d.h. du musst dir keine Sorgen über zu kleine Wertebereiche machen (das bedeutet jedoch nicht,
-    dass eine Zahl beliebig groß sein kann). Dezimalzahlen mit einem Komma müssen statt eines Dezimalkommas jedoch einen Dezimalpunkt verwenden.<br/><br/>
+    Lua benutzt für alle Zahlen intern sogenannte <i>Fließkommazahlen doppelter Genauigkeit</i>, d.h. du musst dir keine Sorgen über zu kleine Wertebereiche machen (das bedeutet jedoch nicht,
+    dass eine Zahl beliebig groß sein kann). Dezimalzahlen (also Zahlen mit Komma) müssen statt eines Dezimalkommas jedoch einen Dezimalpunkt verwenden.<br/><br/>
     
     Zahlen können ganz einfach wie folgt definiert werden:
     
   div.executor
     label Variablen: Zahlen
     pre.
-     meineZahl = 42
+     meineZahl = 42 -- ganze Zahl
      print(meineZahl)
      meineAndereZahl = 13.37 -- Dezimalzahl mit Dezimalpunkt
   p An diesem Beispiel lässt sich sehen, wie eine Variable als Platzhalter eingesetzt werden kann.
@@ -71,7 +71,7 @@ block body
 
   p Der Name darf...
     ul
-      li ...nur aus ASCII Zeichen bestehen (d.h. Sonderzeichen und Umlaute sind <strong>nicht</strong> erlaubt)
+      li ...nur aus alphanumerischen Zeichen (= Buchstaben und Zahlen) bestehen (Sonderzeichen und Umlaute sind jedoch <strong>nicht</strong> erlaubt)
       li ...nicht mit einer Zahl anfangen (muss also mit einem Buchstaben anfangen)
       li ...nicht ausschließlich den Namen eines Lua Schlüsselworts tragen (z.B. end, for, while, ...)
 
