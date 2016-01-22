@@ -8,6 +8,6 @@
 
 module.exports = {
 	index: function(req, res) {
-		res.redirect('/beginner/introduction');
+		res.view('overview', {no_nav: true});
 	}
 };

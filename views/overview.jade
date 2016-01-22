@@ -1,0 +1,69 @@
+extends layout
+
+block styles
+  style(type="text/css").
+    section label {
+      border-bottom: 2px solid #00007E;
+      width: 100%;
+      color: #00007E;
+      font-size: 24px;
+      text-align: right;
+    }
+    
+    a.box {
+      margin-top: 16px;
+      padding: 0;
+    }
+    
+    a.box img {
+      width: 100%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+    a.box p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 5px;
+      
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+    
+    a.box:hover img {
+      box-shadow: 0 4px 8px 0 rgba(0.6, 0.9, 0, 0.2), 0 6px 20px 0 rgba(0, 255, 0, 0.19);
+    }
+
+block body
+  h1 Lua Tutorials und mehr...
+  h2 Was ist Lua?
+  p.
+    Lua (portugiesisch für <i>Mond</i>) ist eine Skriptsprache, die 1993 von der <i>Computer Graphics Technology Group</i> der Päpstlichen Katholischen Unversität von Rio de Janeiro in Brasilien entwickelt wurde.
+    <br/><br/>
+    Sie zeichnet sich insbesondere dadurch aus, dass sie sich sehr leicht einbetten lässt und bei den Sprachfeatures auf das Wesentliche beschränkt.
+  p.
+    Auf dieser Seite findest du Tutorials, die sich zunächst vor allem Lua als Scriptsprache (standalone) widmen. Im zweiten Teil dieses Tutorials wird der Fokus auf Anwendungen gelegt,
+    die Lua einbetten.
+    
+  h2 Was zeichnet dieses Tutorial aus?
+  p.
+    Ziel dieses Tutorials ist den Leser auf verschiedenen Ebenen zu beanspruchen. D.h., dass das Lesen durch Übungen und direktem Ausprobieren per Mausklick unterstützt wird.
+
+  h2 Wie ist dieses Tutorial entstanden?
+  p.
+    Dieses Tutorial ist als Gemeinschaftsproduktion gedacht und wird daher auf GitHub entwickelt, geforked und stetig verbessert. Solltest du also einen Fehler finden,
+    freuen wir uns über die Erstellung eines entsprechenden Eintrags im Bugtracker auf GitHub (oder noch besser direkt als Pull-Request).
+  p.
+    Damit das auch so bleibt, steht das Projekt unter der <i>GPL v3</i> Lizenz.
+
+  br
+  section
+    label Lua als Sprache
+    a.box.col-sm-4(href="/beginner/introduction")
+      img(src="/images/lua_thumb.png")
+      p Lua: Grundlagen
+  
+  section
+    label Anwendungen
+    p Noch keine
