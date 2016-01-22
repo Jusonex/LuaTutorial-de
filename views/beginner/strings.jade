@@ -71,6 +71,23 @@ block body
   div.alert.alert-info
     <strong>Pro tip:</strong> Mit dem <code>#</code>-Operator lässt sich die Länge eines Strings kürzer bestimmen. So ist <code>#meinString</code> äquivalent zu <code>string.len(meinString)</code>
 
+  h4 string.format
+  p.
+    Eine weiterhin sehr nützliche Funktion ist <code>string.format(formatString, ...)</code>. <code>string.format</code> erlaubt es einen String mithilfe von Platzhaltern zu formatieren.
+    Aus anderen Sprachen ist diese Funktion als <i>printf</i> oder <i>sprintf</i> bekannt.
+    Da intern nur die entsprechende Funktion in C aufgerufen wird, sind die Platzhalter identisch und können <a href="http://www.cplusplus.com/reference/cstdio/printf/">hier</a> nachgeschlagen werden.
+    
+  div.executor
+    label Beispiele: string.format
+    pre.
+      -- %s ist ein Platzhalter für alle Strings
+      -- %d ist ein Platzhalter für ganze Zahlen
+      print(string.format("Mein Name ist %s und ich bin %d Jahre alt", "Harry", "99"))
+      
+      -- string.format kann auch zur formatierten Ausgabe von Dezimalzahlen genutzt werden
+      -- %.3f rundet eine Zahl auf 3 Stellen nach dem Komma
+      print(string.format("3 Stellen nach dem Komma von Pi: %.3f", math.pi))
+
   h4 Weiteres
   p.
     Die String-Bibliothek umfasst noch einige, weitere Funktionen, welche z.B. hier eingesehen werden können:

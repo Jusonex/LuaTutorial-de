@@ -16,7 +16,7 @@ block body
     
   h3#return Rückgabewert
   p.
-    Da in den meisten Fällen nur eine bestimmte Prozedur ausgeführt wird, muss eine Funktion nicht nur Eingaben (über Parameter), sondern auch Ausgaben erzeugen können.
+    Da in den meisten Fällen nicht nur eine bestimmte Prozedur ausgeführt wird, muss eine Funktion nicht nur Eingaben (über Parameter), sondern auch <strong>Ausgaben</strong> erzeugen können.
     Dazu gibt es die sogenannten <strong>Rückgabewerte</strong>.
 
   h3#syntax Syntax
@@ -27,6 +27,8 @@ block body
       function meineFunktion(parameter1, parameter2) -- mit 2 Eingaben
         -- beide Parameter (Eingaben) addieren und in Variable "ergebnis" speichern
         local ergebnis = parameter1 + parameter2
+        
+        -- hier kann nahezu jeder beliebige Code stehen
         
         -- Rückgaben werden mit dem "return" Schlüsselwort angegeben
         return ergebnis
@@ -47,7 +49,7 @@ block body
     Dabei können natürlich sowohl Variablen als auch direkt Werte (<i>Literale</i>) übergeben werden.
     
   div.alert.alert-info
-    <strong>Pro tip:</strong> Es können auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
+    <strong>Pro tip:</strong> Es können in Lua auch mehrere Werte zurückgegeben werden, indem diese mit Kommata separiert hintereinander nach dem <code>return</code>-Schlüsselwort aufgelistet werden
 
   h3#exercise Übung
   h4 Teil 1
