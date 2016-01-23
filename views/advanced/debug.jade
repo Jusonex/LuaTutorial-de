@@ -1,0 +1,68 @@
+extends content
+
+block body
+  h1 Tricks mit der Debug-Bibliothek
+  p Die Debug Bibliothek ist nützlich, sollte jedoch auch mit Vorsicht betrachtet werden. Im Folgenden werden einzelne Funktionen beispielhaft vorgestellt.
+  p Eine vollständige API Dokumentation ist hier zu finden: <a href="http://pgl.yoyo.org/luai/i/5.9+The+Debug+Library">http://pgl.yoyo.org/luai/i/5.9+The+Debug+Library</a>
+
+  h2#functions Funktionen
+  h3 <code>debug.getinfo([coroutine,] function [, what])</code>
+  p.
+    Mit der <code>debug.getinfo</code> Funktion können Informationen über eine Funktionen der aktuellen Aufrufkette ausgelesen werden.
+    Dabei ist <i>function</i> die Funktion oder das Level, über das Informationen geholt werden soll. 0 repräsentiert die aktuelle Funktion (also i.A: debug.getinfo), 1 ist die Funktion, die die aktuelle Funktion
+    debug.getinfo aufgerufen hat usw. <i>what</i> legt fest, was ausgelesen werden soll (leer für alles).
+
+  div.executor
+    label debug.getinfo
+    pre.
+      function myFunc()
+        for k, v in pairs(debug.getinfo(1)) do
+          print(k, v)
+        end
+      end
+      myFunc()
+
+  h3 <code>debug.getlocal([coroutine,], level, local)</code>
+  p.
+    Mit <code>debug.getlocal</code> lassen sich lokale Variablen auf Basis eines Indizes auslesen. Das Verhalten des Levels ist wie bei debug.getinfo.
+    
+  div.executor
+    label debug.getlocal
+    pre.
+      local var1 = 42
+      local var2 = 1337
+      
+      print(debug.getlocal(1, 1))
+      print(debug.getlocal(1, 2))
+
+  h3 <code>debug.setmetatable(object, table)</code>
+  p.
+    Das normale <code>setmetatable</code> funktioniert nur bei Tables. <code>debug.setmetatable</code> erlaubt Metatables auf jeden Typen zu setzen.
+    So kann man bspw. das Verhalten der Addition zweiter nicht definierten Variablen ändern.
+    Wirklich sinnvoll ist die Funktion aber nur im Zusammenhang mit Userdatas im Sinne der Objektorientierung (dazu im OOP Teil mehr).
+    
+  div.executor
+    label debug.setmetatable
+    pre.
+      debug.setmetatable(nil, {
+        __add = function(var1, var2)
+          return "fritz"
+        end
+      })
+      
+      print("a + b ist: "..a+b)
+
+  h3 <code>debug.traceback([coroutine,], [message], [,level])</code>
+  p.
+    <code>debug.traceback</code> gibt die Aufrufkette mit einigen Zusatzinformationen zurück. Diese Funktion ist sehr nützlich, wenn man nicht weiß, woher eine Fehlermeldung genau kommt,
+    wenn die Funktion von vielen Stellen aus aufgerufen wird.
+    
+  div.executor
+    label debug.traceback
+    pre.
+      function func()
+        (function()
+          print(debug.traceback())
+        end)()
+      end
+      func()

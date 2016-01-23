@@ -63,4 +63,5 @@ module.exports.routes = {
   '/advanced/metatables': {view: 'advanced/metatables'},
   '/advanced/coroutine': {view: 'advanced/coroutine'},
   '/advanced/bytecode': {view: 'advanced/bytecode'},
+  '/advanced/debug': {view: 'advanced/debug'},
 };
