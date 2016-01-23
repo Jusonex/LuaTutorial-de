@@ -1,0 +1,155 @@
+extends content
+
+block body
+  h1 Variablen und Funktionen
+  p.
+    Als im Grundlagentutorial Typen von Variablen (hinsichtlich ihrer Gültigkeitsbereiche) eingeführt wurden, wurde nur die halbe Wahrheit gesagt.
+    Es gibt nämlich noch einen weiteren Typ: Die sog. <strong>Upvalues</strong> oder gebundenen Variablen. Bevor die genaue Erklärung folgt, wird noch eine
+    Neuerung zum Thema Funktionen eingeführt.
+
+  h2#anonymous Anonyme Funktionen / Closures
+  p.
+    Anonyme Funktionen sind im Wesentlichen Funktionen, die keinen Namen haben (daher der Name). Diese Funktionen lassen sich als ganz normale Variablen
+    behandeln (normale Funktionen übrigens auch!).
+    
+  div.executor
+    label Anonyme Funktionen
+    pre.
+      -- Anonyme Funktion, die lokal einen Namen bekommt
+      local f1 = function() print("Hello world!") end
+      
+      function f2(someFunc)
+        -- Übergebene Funktion aufrufen
+        someFunc()
+      end
+      
+      -- f2 mit f1 aufrufen
+      f2(f1)
+      
+      -- Anonyme Funktion im eigentlichen Sinne
+      f2(function() print("Hallo Welt!") end)
+
+  p Wie aus dem Beispiel hervorgeht unterscheidet sich die Definition nur darin, dass der Funktionsname weggelassen wird.
+
+  h2#types Typen (Gültigkeitsbereiche)
+  p.
+    Bekannt sind bisher <i>lokale</i> und <i>globale</i> Variablen: Globale Variablen gelten global, lokale Variablen nur in ihrem Block.
+    Aber was ist, wenn Variablen außerhalb eines Blocks definiert sind?
+    
+  div.executor
+    label Upvalues
+    pre.
+      function output(f)
+        f()
+      end
+      
+      function someFunction()
+        -- Variablen definieren
+        local a = 1337
+        
+        output(
+            function()
+              -- Funktioniert das?
+              print(a)
+            end
+          )
+      end
+      
+      someFunction()
+
+  p.
+    <i>a</i> ist als lokale Variable definiert, ist aber in der verschachtelten Funktion gültig. Nach der genauen Definition von lokalen Variablen ist das nicht möglich und a
+    müsste <code>nil</code> sein.
+  
+  p.
+    Dies ist aber offensichtlich nicht der Fall. Das liegt daran, dass <i>a</i> in der anonymen Funktion, die <i>output</i> übergeben wird keine lokale Variable ist, sondern dann als
+    <strong>Upvalue</strong> bezeichnet und gehandhabt wird.
+
+  p.
+    Intern werden Upvalues in der Reihenfolge der Definition in Tabellen, die der Funktion zugeordnet werden, gespeichert. Das bedeutet aber gleichzeitig,
+    dass dabei - im Gegensatz zu globalen Variablen - nicht gesucht werden muss.
+    Das bedeutet, dass <strong>Upvalues deutlich schneller sind als globale Variablen</strong> und gleichzeitig einen eingeschränkten Gültigkeitsbereich aufweisen.
+    
+  div.alert.alert-success <strong>Goldene Regel:</strong> Globale Variablen sollten nur benutzt werden, wenn es wirklich nötig ist.
+
+  p.
+    Glücklicherweise werden Upvalues und lokale Variablen auf die selbe Weise deklariert, sodass man sich keine Gedanken darüber machen muss, ob es sich gerade
+    um eine Upvalue Variable oder lokale Variable handelt (denn das kann am Anfang ganz schön verwirrend sein).
+
+  h2#g Globale Variablen: <code>_G</code>
+  p.
+    Erwähnt wurde schon, dass globale Variablen <i>gesucht</i> werden müssen. Dies ließe sich damit erklären, dass globale Variablen nur Variablen in einer Table sind mit dem Namen als Schlüssel
+    
+  p <code>_G</code> ist die Table der globalen Variablen
+  
+  div.executor
+    label Globale Variablen
+    pre.
+      -- Globale Variable definieren
+      globalVar = "eineVariable"
+      
+      -- Ausgeben
+      print(globalVar)
+      
+      -- Aus _G ausgeben
+      print(_G["globalVar"])
+    
+  div.alert.alert-danger <strong>Anti-Pattern:</strong> Manchmal sieht man, dass <code>_G</code> benutzt wird, um das zu machen, was eigentlich der Zweck von Tables als Maps ist.
+    div.executor
+      label So nicht!
+      pre.
+        for id = 1, 5 do
+          _G["vehicle"..id] = "Ein Fahrzeug"
+        end
+        
+        -- Später wird nun mithilfe der id auf das Fahrzeug zugegriffen
+        print(_G["vehicle"..2])
+        -- ...oder
+        print(vehicle2)
+
+    | Wie verführerisch diese Konstruktion manchmal auch wirken mag. Diese Konstruktion ist ein sehr schlechter Stil und sollte nicht eingesetzt werden. Der korrekte Weg wäre folgender:
+    div.executor
+      label So aber!
+      pre.
+        local vehicles = {}
+        for id = 1, 5 do
+          vehicles[id] = "Ein Fahrzeug"
+        end
+        
+        print(vehicles[2])
+
+  h2#copyreference Kopie vs. Referenz
+  p Eines Vorweg: In Lua kann man nicht selbst entscheiden, ob etwas als Kopie oder Referenz übergeben werden soll.
+  p Aber was ist überhaupt eine Referenz? Wenn eine Variable eine Referenz ist, werden Änderungen an der Variablen überall übernommen. Folgendes Beispiel soll diesen Sachverhalt deutlich machen.
+  
+  div.executor
+    label Call by value vs. call by reference
+    pre.
+      function doSomething(num, tab)
+        -- Wert der Parameter ändern
+        num = 2
+        tab[1] = 42
+      end
+      
+      -- Werte definieren
+      local someNumber = 1
+      local someTable = {1}
+      
+      -- Funktion jetzt aufrufen
+      doSomething(someNumber, someTable)
+      
+      -- Werte ausgeben
+      print(someNumber)
+      for k, v in pairs(someTable) do
+        print(k, v)
+      end
+
+  p.
+    Die erwartete Ausgabe wäre zunächst eigentlich 1 für <i>someNumber</i> und <i>{1}</i> für <i>someTable</i>, oder?
+    Dies ist aber offenbar zumindest im Falle der Table nicht der Fall.
+    
+  p.
+    Der Grund dafür ist, dass Tables im Gegensatz zu (fast) allen anderen Variablen nicht als Kopie übergeben werden, sondern als Referenz, sodass Tables außerhalb ihres direkten
+    Gültigkeitsbereichs durch Übergabe per Parameter geändert werden können.
+    Das hat im Wesentlichen 2 Gründe:<br/> Zum einen wäre es sehr aufwendig eine ganze Table jedes Mal zu kopieren (bei anderen Typen ist der Aufwand minimal), zum anderen ist dieses Verhalten
+    notwendig, damit sich Objektorientierung umsetzen lässt.

@@ -59,4 +59,5 @@ module.exports.routes = {
   '/advanced': {view: 'advanced/introduction'},
   '/advanced/introduction': {view: 'advanced/introduction'},
   '/advanced/tables': {view: 'advanced/tables'},
+  '/advanced/variables': {view: 'advanced/variables'},
 };
