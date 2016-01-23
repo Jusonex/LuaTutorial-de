@@ -62,4 +62,5 @@ module.exports.routes = {
   '/advanced/variables': {view: 'advanced/variables'},
   '/advanced/metatables': {view: 'advanced/metatables'},
   '/advanced/coroutine': {view: 'advanced/coroutine'},
+  '/advanced/bytecode': {view: 'advanced/bytecode'},
 };

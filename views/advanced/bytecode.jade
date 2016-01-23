@@ -1,0 +1,123 @@
+extends content
+
+block body
+  h1 Bytecode und Luac
+  h2#motivation Motivation
+  p.
+    Was ist eigentlich der Unterschied zwischen Lua und C++, was ist Bytecode und was macht der Lua Compiler?
+    Diese Fragen sollen in diesem Kapitel beantwortet werden.
+
+  h2#interpreter Interpreter
+  p.
+    Lua ist eine Skriptsprache, die von einem sog. <i>Interpreter</i> <strong>interpretiert</strong> wird.
+    C++ ist eine Compilersprache, die von einem <i>Compiler</i> in nativen Code <strong>kompiliert</strong> wird.
+    <br/>
+    Aber was ist <i>nativer Code</i>? Nativer Code ist Code, der von der Maschine, also der CPU direkt verstanden wird.
+    Dabei übersetzt der C++-Compiler den C++ Code in eine Sprache, die von der Maschine direkt verstanden wird. Unter Windows haben Dateien, die dabei entstehen die Endungen
+    <i>.exe, .dll oder .com</i> (aber Achtung: .exe/.dll Dateien, die von .NET erzeugt wurden, enthalten i.A. keinen nativen Code).
+    
+  p.
+    Diese resultierenden .exe Dateien bringen (wenn man von zusätzlichen Bibliotheken mal absieht) alles mit, was zur Ausführung benötigt wird und benötigen daher keine zusätzlichen Programme.
+    In anderen interpretierten Sprachen wie Lua, Java, C#, VB.NET ist das nicht der Fall. Diese Sprachen benötigen <strong>alle</strong> ein zusätzliches Programm,
+    die sog. <strong>virtuelle Maschine</strong> (die im Wesentlichen ein Interpreter ist). Der Name erklärt im Prinzip schon, was es ist. Die virtuelle Maschine ist eine Maschine, die
+    nicht als Hardware existiert, sondern von einer Software simuliert wird.
+
+  h2#bytecode Bytecode
+  p.
+    Nun wäre es eine sehr aufwendige Angelegenheit den Code Zeile für Zeile abzuarbeiten. Für uns Menschen ist das leicht, für eine Maschine sehr aufwendig.
+    Daher wird der geschriebene Lua/Java/.NET Code in ein Zwischenformat - dem <strong>Bytecode</strong> - umgewandelt, das von einer Maschine besser verstanden werden kann,
+    aber trotzdem noch durch die virtuelle Maschine interpretiert werden muss.
+  p.
+    Der Nachteil dieser Funktionsweise ist, dass solche Programme in dieser Form deutlich langsamer laufen als Code, der direkt auf der Maschine ausgeführt wird.
+  p.
+    Gleichzeitig bringt es aber auch eine Reihe von Vorteilen: Es können plötzlich Sachen realisiert werden, die mit nativem Code nur mit sehr viel Aufwand möglich wären.
+    Dazu gehören z.B. Laufzeitfeatures wie dynamische (wechselnde) Typen wie sie in Lua vorhanden sind.
+
+  h2#luac Luac
+  p.
+    Was nun nur noch fehlt ist ein Programm, dass aus Lua Code den Lua Bytecode erzeugt.
+    Genau das ist die Funktion von <strong>luac</strong>.
+    
+  h3 Verwendung
+  p Wenn Luac installiert wurde (<a href="https://github.com/rjpcomputing/luaforwindows">LuaForWindows</a>, bei Linux ist Luac i.A. in den Paketquellen), kann es über die Kommandozeile
+  wie folgt gesteuert werden.
+
+  p Script "meinScript.lua" in "meinScript.luac" kompilieren
+  <pre>luac -o meinScript.luac meinScript.lua</pre>
+
+  p Es lassen sich auch mehrere Lua Scripte gleichzeitig in eine Ausgabedatei kompiliert werden
+  <pre>luac -o meinScript.luac meinScript1.lua meinScript2.lua meinScript3.lua</pre>
+  
+  p.
+    Die Ausgabe von Debugnachrichten/Fehlern funktioniert genau wie vorher, da in den Ausgabedateien standardmäßig sog. <i>Debug-Symbole</i> eingebettet sind, die dem erzeugten Bytecode
+    einzelne Zeilen im originalen Lua Code zuordnen. Abgeschaltet werden kann dieses Verhalten mit der Zusatzoption <code>-p</code>. Dies führt jedoch dazu,
+    dass Fehlermeldungen keine Zeilennummern und (lokalen) Variablennamen enthalten.
+    
+  h3 Was Luac nicht ist
+  p.
+    Manchmal wird behauptet, dass Luac den Lua Code <i>verschlüsselt</i>. Wie jetzt klar geworden sein sollte, ist dies nicht der Fall. Er wird lediglich in eine Form umgewandelt,
+    die der Mensch bei erstem Hinsehen nicht versteht. Zudem würde eine Verschlüsselung bedeuten, dass die virtuelle Maschine (VM) den Code (ohne Schlüssel zum Entschlüsseln)
+    selbst nicht mehr interpretieren kann.
+  p.
+    Daraus folgt weiterhin, dass Luac nur sehr bedingt genutzt werden kann, um Code vor Veränderung/Einsicht Dritter zu schützen. Da mit dem Herausschneiden der
+    Debug-Symbole (Option <code>-s</code>) zwar (lokale) Variablennamen und Zeilennummern verschwunden sind, wird es schwieriger den Code zu verstehen,
+    da aber der Lua-Bytecode im Gegensatz zu nativem Code sehr mächtige Operationen mitliefert, kann mit einem <strong>Decompiler</strong> oft eine Form erzeugt werden,
+    die dem Originalcode nahe kommt.<br/>
+    Mit manchen Tricks lassen sich Bugs von Decompilern ausnutzen, um sie zum Crashen zu bringen, dabei ist es jedoch nur eine Frage des Wissens des Dritten,
+    um den Code zu entziffern - denn die Maschine muss es das auch noch können.
+
+  h2#assembly Assembler
+  p.
+    Am Ende soll das Thema Bytecode noch einmal vertieft werden. Assembler (engl. Assembly) ist die <strong>direkte</strong> Repräsentation des Bytecodes
+    (oder auch Maschinencodes), wobei der Informationsgehalt beider Darstellungen exakt gleich ist.
+  p Der Assembler als Programm wandelt Bytecode oder Maschinencode in eine binäre Form um und der Disassembler macht diesen Vorgang rückgängig.
+  
+  h3 Darstellungsformen
+  h4 Lua
+  div.executor
+    label Lua Code: Ein einfaches Script
+    pre.
+      local var = 1337
+      if var == 1337 then
+        print(var)
+      end
+      
+  h4 Lua-Assembler (generiert mit <a href="http://chunkspy.luaforge.net/">Chunkspy</a>)
+  pre.
+    ; function [0] definition (level 1)
+    ; 0 upvalues, 0 params, 3 stacks
+    .function  0 0 0 3
+    .local  "var"  ; 0
+    .const  1337  ; 0
+    .const  "print"  ; 1
+    [1] loadk      0   0        ; 1337
+    [2] eq         0   0   250  ; 1337, to [4] if true
+    [3] jmp        3            ; to [7]
+    [4] getglobal  1   1        ; print
+    [5] move       2   0
+    [6] call       1   2   1
+    [7] return     0   1
+    ; end of function
+
+  h4 Lua Bytecode (in Hex)
+  pre.
+    1B 4C 75 61 51 00 01 04 04 04 08 00 00 00 00 00
+    00 00 00 00 00 00 00 00 00 00 02 03 07 00 00 00
+    01 00 00 00 17 00 40 00 16 80 00 80 45 40 00 00
+    80 00 00 00 5C 40 00 01 1E 00 80 00 02 00 00 00
+    03 00 00 00 00 00 E4 94 40 04 06 00 00 00 70 72
+    69 6E 74 00 00 00 00 00 00 00 00 00 00 00 00 00
+    00 00 00 00
+
+  p.
+    Die letzten beiden Repräsentationen haben exakt dieselbe Aussagekraft (wenn man den Umstand außen vor lässt, dass das Assembler-Beispiel noch Debuginformationen enthält).
+    Die zweite Form kann man beim zweiten Hinsehen verstehen, den Bytecode in Hex unten nicht (solange man nicht das Bytecodeformat auswendig gelernt hat).
+  
+  h2#jit Just in Time Compiling
+  p.
+    Zu guter letzt noch ein paar Worte zur Performance. Oben wurde gesagt, dass Sprachen wie Java und C# interpretiert werden. Das ist jedoch nur die halbe Wahrheit.
+    Wenn sie nur interpretiert werden würden, wären sie um einiges langsamer, das ist aber nicht der Fall. Um bessere Testwerte zu erzielen,
+    werden sog. Just in Time Compiler eingesetzt, die den Bytecode während der Laufzeit nochmal in nativen Maschinencode kompilieren.
+  p.
+    In Lua funktioniert das mit <a href="http://luajit.org/">LuaJIT</a> auch, erzielt jedoch nicht immer eine bessere Performance, da der Kontextwechsel zwischen Lua und C(++) bei
+    Anwendungen, die Lua einbetten, den Flaschenhals darstellt, sodass LuaJIT i.A. nicht eingesetzt wird.
