@@ -31,6 +31,50 @@ block body
 
   p Wie aus dem Beispiel hervorgeht unterscheidet sich die Definition nur darin, dass der Funktionsname weggelassen wird.
 
+  h2#varargs Varargs
+  p Vararg Funktionen sind Funktionen, deren Anzahl an Parametern nicht festgelegt ist, sondern variieren kann. Ausgedrückt wird das mit der <code>...</code>-Notation.
+  
+  p Verdeutlicht werden soll der Vorteil durch folgendes Beispiel: Wir möchten eine Funktion bauen, die beliebig viele Variablen/Werte ausgeben kann (vergleichbar mit der print-Funktion).
+  div.executor
+    label Variable Parameter
+    pre.
+      -- Bisherige Implementierung
+      -- d.h. wir brauchen so viele Parameter wie Werte übergeben werden sollen
+      -- ==> unübersichtlich
+      function output1(p1, p2, p3, p4)
+        local s = p1
+        if p2 then s = s.." "..p2 end
+        if p3 then s = s.." "..p3 end
+        if p4 then s = s.." "..p4 end
+        print(s)
+      end
+      output1("Parameter 1", "Parameter 2", "Parameter 3", "Parameter 4", "Parameter 5") -- nur 1-4 wird ausgegeben
+      
+      -- Mit Varargs
+      function output2(...)
+        -- ... repräsentiert alle Parameter
+        -- damit wir über sie iterieren können, müssen die Parameter in eine Table gewrappt werden
+        local params = {...}
+        local s = ""
+        for k, param in pairs(params) do
+          s = s..param.." "
+        end
+        print(s)
+      end
+      output2("Parameter 1", "Parameter 2", "Parameter 3", "Parameter 4", "Parameter 5") -- beliebig viele werden ausgegeben
+      
+  p.
+    Damit in diesem Beispiel über die Parameter iteriert werden konnte, war es nötig sie vorher in eine Table zu legen (da <code>pairs</code> nur mit Tables funktioniert).
+    Weiterhin kann diese Notation verwendet werden, um alle Parameter einer Funktion an eine andere weiterzureichen. Dabei werden die <i>Varargs</i> direkt übergeben.
+    
+  div.executor
+    label Parameter weiterreichen
+    pre.
+      function f1(...)
+        print(...)
+      end
+      f1("Hallo", "Welt", "1", "2", "3")
+  
   h2#types Typen (Gültigkeitsbereiche)
   p.
     Bekannt sind bisher <i>lokale</i> und <i>globale</i> Variablen: Globale Variablen gelten global, lokale Variablen nur in ihrem Block.
