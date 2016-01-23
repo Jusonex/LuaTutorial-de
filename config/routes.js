@@ -61,4 +61,5 @@ module.exports.routes = {
   '/advanced/tables': {view: 'advanced/tables'},
   '/advanced/variables': {view: 'advanced/variables'},
   '/advanced/metatables': {view: 'advanced/metatables'},
+  '/advanced/coroutine': {view: 'advanced/coroutine'},
 };

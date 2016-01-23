@@ -1,0 +1,56 @@
+extends content
+
+block body
+  h1 Coroutinen
+  h2#motivation Motivationen
+  p.
+    Zunächst wird manchmal fälschlicherweise behauptet, dass Coroutinen nebenläufe/parallele Ausführungen erlauben. Das ist falsch. Coroutinen sind nicht mehr als Funktionen, die angehalten
+    und fortgesetzt werden können, sodass sich einige nützliche Konstruktionen damit umsetzen lassen. In der Praxis sieht man sie jedoch recht selten, da sie - zumindest bis Lua 5.1 - 
+    recht restriktiv sind und sich in vielen Kontexten nicht benutzen lassen (z.B. konnten Coroutinen bis Lua 5.1 nicht angehalten werden, wenn sie aus einer C-Funktion heraus aufgerufen wurden).
+  
+  h2#functionality Funktionsweise
+  p.
+    Bei Coroutinen gibt es eigentlich nicht viel zu beachten. Sie werden mit <code>coroutine.create(func)</code> erstellt, mit
+    <code>coroutine.yield()</code> angehalten und <code>coroutine.resume(co)</code> fortgesetzt.
+    <code>coroutine.status</code> kann weiterhin genutzt werden, um den Status der Coroutine abzufragen.
+    
+  p Zu beachten ist dabei, dass eine Coroutine nur innerhalb der Coroutinen selbst angehalten werden kann (alles andere würde Parallelisierung voraussetzen).
+
+  p Dazu ein Beispiel:
+  div.executor
+    label Coroutines in a nutshell
+    pre.
+      -- Coroutine erstellen
+      local co = coroutine.create(
+        function()
+          -- for-Schleife nach jedem Durchgang angehalten
+          for i = 0, 10 do
+            print(string.format("Durchgang: "..i))
+            coroutine.yield()
+          end
+        end
+      )
+      
+      -- Coroutine mit resume starten
+      coroutine.resume(co)
+      
+      -- Status ausgeben
+      print(coroutine.status(co))
+      
+      -- und weitere 10x fortsetzen
+      for i = 0, 10 do
+        coroutine.resume(co)
+      end
+
+      -- Status ausgeben
+      print(coroutine.status(co))
+
+  p.
+    So ist diese Konstruktion wenig sinnvoll und zielführend. Interessant werden Coroutinen erst, wenn sie aus verschiedenen Kontexten aufgerufen werden.
+    Zum Beispiel können Coroutinen genutzt werden, um auf das Ergebnis von Datenbankabfragen zu warten ohne dass die Ausführung des Lua Codes allgemein blockiert wird.
+    Dazu muss die Funktion zur Datenbankabfrage um einen Aufruf von <code>coroutine.yield</code> erweitert werden und <code>coroutine.resume</code> wird von einer Callback-Funktion (Funktion, die
+    per Parameter an eine andere Funktion übergeben wird und von dieser später aufgerufen wird) der Datenbankabfrage aus aufgerufen.
+
+  p.
+    Aus diesem Beispiel ergibt sich aber auch gleich ein Nachteil von Coroutinen. Coroutinen müssen erst mit <i>coroutine.create</i> erstellt worden sein, damit sie angehalten werden können.
+    Dementsprechend muss am Anfang jeder Aufrufkette <i>coroutine.create</i> stehen, was manchmal auf direktem Wege gar nicht möglich ist.
