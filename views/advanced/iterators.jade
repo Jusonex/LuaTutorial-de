@@ -1,0 +1,50 @@
+extends content
+
+block body
+  h1 Iteratoren
+  h2#motivation Motivation
+  p.
+    Iteratoren sind in Lua spezielle Funktionen, die genutzt werden, um Datenstrukturen "durchzugehen" (iterieren).
+    Für eine bessere Übersicht kann es daher manchmal hilfreich sein sich zusätzliche Iteratoren zu definieren.
+
+  h2#functionality Funktionsweise
+  p Ein Iterator ist nichts anderes als eine Funktion, die eine andere Funktion zurückgibt und dabei i.d.R. einen Zustand speichert.
+  p Ein einfacher Iterator, der Tables in einem bestimmten Index-Bereich iteriert, könnte wie folgt aussehen:
+  div.executor
+    label Ein einfacher Iterator
+    pre.
+      function range_iter(tab, startIndex, endIndex)
+        -- Es könnte auch direkt startIndex und endIndex benutzt werden,
+        -- da aber nicht nur die Zahlen zwischen start und end genommen werden sollen, Bereich etwas ausweiten
+        local i = startIndex-1
+        local n = endIndex+1
+        
+        return function()
+          i = i + 1
+          if i ~= n then
+            return i, tab[i]
+          end
+        end
+      end
+      
+      -- Test
+      local tab = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+      for i, num in range_iter(tab, 3, 6) do
+        print(i, num)
+      end
+  
+  p.
+    Der Ablauf ist, dass <code>range_iter</code> einmalig aufgerufen wird und die Zustände hält, während die Funktion, die zurückgegeben wird, solange aufgerufen wird,
+    bis sie das erste Mal <i>nil</i> zurückgibt.<br/>
+    Die Rückgaben der inneren Funktion sind des Weiteren die Werte, die bei der for-Schleife zwischen <code>for</code> und <code>in</code> stehen, wobei beliebig viele Werte zurückgegeben
+    werden können.
+  
+  h2#predefined Vordefinierte Iteratoren
+  p.
+    Vordefiniert sind nur die beiden Iteratoren <code>pairs</code> und <code>ipairs</code>.
+    <code>pairs</code> ist aus dem Grundlagentutorial bekannt und iteriert über eine beliebige Table.
+    <code>ipairs</code> hingegen iteriert nur über numerisch indiizerte Tables - sprich Arrays und war solange, bis der erste Wert im Array <i>nil</i> ist.
+    <i>ipairs</i> ist jedoch deutlich langsamer als <i>pairs</i> da es die Table vorher sortiert.
+    Wenn die Reihenfolge also keine Rolle spielt oder aus irgendeinem anderen Grund <i>ipairs</i> gebraucht wird, sollte lieber <i>pairs</i> oder eine <i>numerische</i>
+    for-Schleife eingesetzt werden.
+  p Einige weitere Informationen und Beispiele findet man in der offiziellen Lua Dokumentation: <a href="http://www.lua.org/pil/7.html">http://www.lua.org/pil/7.html</a>
