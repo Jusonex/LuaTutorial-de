@@ -79,7 +79,22 @@ block body
     Des Weiteren ist es sinnvoll sich an bestimmte Namenskonventionen zu halten, damit der Code auch von anderen Entwicklern möglichst schnell verstanden werden kann.
     Der wichtigste Punkt ist, dass du deinen Variablen eindeutige und selbsterklärende Namen geben solltest. Weiterhin solltest du überlegen, ob sich später vielleicht Personen aus dem
     internationalen Raum anschließen und dann typischerweise mit einer englischen Namensgebung und Kommentaren arbeiten.
-    
+  
+  h3#casts Konvertierungen
+  p In manchen Fällen ist es notwendig eine Zahl in einen String umzuwandeln oder andersherum. Das funktioniert mit den Funktionen <code>tostring</code> und <code>tonumber</code>.
+  div.executor
+    label Casts
+    pre.
+      local num = 2
+      print(tostring(num))
+      print(type(num))
+      print(type(tostring(num))) -- mit type kann man den Typ anzeigen
+      
+      local s = "2"
+      print(tonumber(s))
+      print(type(s))
+      print(type(tonumber(s)))
+  
   h3#exercise Übung
   h4 Teil 1
   p Aufgabe dieser Übung ist das Definieren von 4 Variablen (die Namen der Variablen können frei gewählt werden, wenn nicht anders angegeben)
