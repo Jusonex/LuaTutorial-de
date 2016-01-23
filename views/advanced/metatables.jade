@@ -1,0 +1,191 @@
+extends content
+
+block body
+  h1 Metatables
+  h2#motivation Motivation
+  p Da sind sie endlich - die Metatables. Metatables sind der Grund, warum Lua so einzigartig flexibel ist.
+  p.
+    Metatables sind Tables, die zusätzliche Informationen zu Tables bereitstellen, die Tables <i>beschreiben</i> (als <i>Metainformation</i>).
+    Zunächst ist die Metatable eine ganz normale Table, die alles enthalten kann. Da sie aber hinter einer Table <i>versteckt</i> ist, kann sie genutzt werden,
+    um Funktionalitäten nach dem Blackbox Prinzip zu vergergen.
+
+  h2#setmt Metatable setzen
+  p Ein kurzes Beispiel soll verdeutlichen wie Metatables mit <code>setmetatable</code> gesetzt und <code>getmetatable</code> ausgelesen werden können.
+  div.executor
+    label Metatables setzen und auslesen
+    pre.
+      -- Table definieren
+      local tab = {schluessel = "wert"}
+      
+      -- Metatable definieren und setzen
+      local mt = {irgendwas = 1}
+      setmetatable(tab, mt) -- Metatable mt (syntaktisch ganz normale Table) auf tab setzen
+
+      -- tab1 ausgeben
+      -- Erwartung: nur schluessel = "wert" (keine Metatable)
+      for k, v in pairs(tab) do
+        print(k, v)
+      end
+      
+      -- Metatable auslesen und ausgeben
+      for k, v in pairs(getmetatable(tab)) do
+        print(k, v)
+      end
+
+  h2#metamethods Metamethoden
+  p Wir wissen nun, dass Metatables zunächst nur ganz normale Tables sind, die mit einer anderen Table assoziiert werden können. Ohne das nächste Konzept - den Metamethoden - wären Metatables damit recht langweilig.
+  p Metamethoden <i>beschreiben</i> das Verhalten (<i>die Methodik</i>) von Tables bei bestimmten Operationen und beginnen zur Kennzeichnung immer mit 2 Unterstrichen (<code>__</code>).
+
+  table.table.table-striped
+    thead
+      tr
+        th Name
+        th Parameter
+        th Beschreibung
+    tbody
+      tr
+        th(colspan="3", style="text-align: center;") Mathematische Operatoren
+      tr
+        td __unm
+        td tab
+        td Wird aufgerufen, wenn die Minus-Operation auf die Table angewendet wird: <code>-val2</code>
+      tr
+        td __add
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn etwas auf eine Table addiert wird: <code>tab1 + val2</code>
+      tr
+        td __sub
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn etwas von einer Table subtrahiert wird: <code>tab1 - val2</code>
+      tr
+        td __mul
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn eine Table multipliziert wird werden: <code>tab1 * val2</code>
+      tr
+        td __div
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn eine Table dividiert wird: <code>tab1 / val2</code>
+      tr
+        td __mod
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn der Module-Operator auf eine Table angewendet wird: <code>tab1 % val2</code>
+      tr
+        td __pow
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn der Potenzoperator auf eine Table angewendet wird: <code>tab1 ^ val2</code>
+      tr
+        td __concat
+        td tab1, val2 (Reihenfolge wie bei Aufruf)
+        td Wird aufgerufen, wenn der Verkettungsoperator auf eine Table angewendet wird: <code>tab1..val2</code>
+        
+      tr
+        th(colspan="3", style="text-align: center;") Spezial-Operatoren
+      tr
+        td __index
+        td tab, key
+        td Wird aufgerufen, wenn versucht wird auf einen Index der Table zuzugreifen, der <strong>nicht</strong> existiert
+      tr
+        td __newindex
+        td tab, key, value
+        td Wird aufgerufen, wenn versucht wird einen neuen Wert <code>value</code> unter dem Schlüssel <code>key</code> in eine Table zu schreiben, der bisher nicht existierte
+      tr
+        td __weak
+        td tab
+        td Kontrolliert das Verhalten des Garbage Collectors
+      tr
+        td __call
+        td tab, ...
+        td Wird aufgerufen, wenn eine Table als Funktion betrachtet wird: <code>tab(...)</code>
+      tr
+        td __metatable
+        td tab
+        td Kann genutzt werden, um <code>getmetatable</code> etwas anderes zurückgeben zu lassen
+      tr
+        td __tostring
+        td tab
+        td Wird aufgerufen, wenn die <code>tostring</code>-Funktion auf die Table aufgerufen wird
+      tr
+        td __len
+        td tab
+        td Wird aufgerufen, wenn der <code>#</code>-Operator auf die Table angewendet wird
+      tr
+        td __gc
+        td tab
+        td Wird aufgerufen, bevor ein <strong>Userdata</strong> oder Table (ab Lua 5.2) vom Garbage Collector gelöscht wird
+      
+      tr
+        th(colspan="3", style="text-align: center;") Vergleichs-Operatoren
+      tr
+        td __eq
+        td tab1, val2
+        td Wird aufgerufen, wenn eine Table mit einem anderen Wert verglichen wird
+      tr
+        td __lt
+        td tab1, val2
+        td Wird aufgerufen, wenn eine Table mit der kleiner-als Operation mit einem Wert verglichen wird (dabei gilt: <code>tab1 > val == val2 < tab1)
+      tr
+        td __le
+        td tab1, val2
+        td Wird aufgerufen, wenn eine Table mit der kleiner-gleich Operation mit einem anderen Wert verglichen wird (dabei gilt: <code>tab1 >= val == val2 <= tab1)
+      
+  p Das Ganze soll nun durch ein Beispiel verdeutlicht werden. Das Ziel ist 2 Punkte, die durch eine Table repräsentiert werden, elegant zu addieren.
+  div.executor
+    label __add im Einsatz
+    pre.
+      -- 2 Punkte definieren
+      local point1 = {x = 1, y = 2}
+      local point2 = {x = 3, y = 4}
+      
+      -- der normale Weg...
+      local point3 = {x = point1.x + point2.x, y = point1.y + point2.y}
+      print(string.format("point3 = (%d, %d)", point3.x, point3.y))
+      
+      -- ...der Metatable Weg (Metatable auf 1. Punkt reicht)
+      -- wird einmalig im Code für Punkte definiert
+      setmetatable(point1, {
+          __add = function(p1, p2)
+            return {x = p1.x + p2.x, y = p1.y + p2.y}
+          end
+      })
+      
+      -- Jetzt addieren
+      local point4 = point1 + point2
+      print(string.format("point4 = (%d, %d)", point4.x, point4.y))
+      
+  p.
+    Damit ähneln Metatables der aus C++ bekannten Operatorenüberladungen. Eine alternative, aber gebräuchliche Beschreibung von Metatables ist noch sie als Events zu sehen, die bei
+    Operationen/Aktionen ausgelöst werden und das Verhalten dieser steuern.
+
+  div.executor
+    label __index im Einsatz
+    pre.
+      local tab = {}
+      setmetatable(tab, {
+        __index = function(tab, key)
+          print("key = "..key.." ist nicht vorhanden!")
+          return 42
+        end
+      })
+      
+      print(tab[1])
+
+  h2#raw rawget, rawset
+  p In bestimmten Fällen möchte man Metamethoden nicht auslösen (um z.B. Endlosschleifen zu verhindern). Mit den Funktionen <code>rawget(tab, key)</code> und <code>rawset(tab, key, value)</code> kann ein Wert
+  ausglesen oder gesetzt werden ohne dass dabei eine Metamethode ausgelöst wird.
+  
+  div.executor
+    label rawset, rawget
+    pre.
+      local tab = {}
+      setmetatable(tab, {
+        __index = function(tab, key)
+          print("key = "..key.." ist nicht vorhanden!")
+          return 42
+        end
+      })
+    
+      print(tab[1])
+      print(rawget(tab, 1))
+      
+      rawset(tab, 1, "Bla")
+      print(tab[1])
