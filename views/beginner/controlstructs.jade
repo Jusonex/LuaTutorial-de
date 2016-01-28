@@ -180,6 +180,17 @@ block body
         print(meinZaehler)
       end
 
+  div.alert.alert-info Alle Schleifen können wie folgt mit dem Schlüssekwort <code>break</code> abgebrochen werden.
+    div.executor
+      label Schleifen abbrechen
+      pre.
+        for i = 0, 10 do
+          print(i)
+          if i == 5 then
+            break
+          end
+        end
+
   h3#brackets Klammerung
   p Bedingungen können beliebig geklammert werden, wobei die Anzahl der geschlossenen Klammern mit der Anzahl der geöffneten übereinstimmen muss.
 
