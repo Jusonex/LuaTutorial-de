@@ -170,8 +170,9 @@ block body
       print(tab[1])
 
   h2#raw rawget, rawset
-  p In bestimmten Fällen möchte man Metamethoden nicht auslösen (um z.B. Endlosschleifen zu verhindern). Mit den Funktionen <code>rawget(tab, key)</code> und <code>rawset(tab, key, value)</code> kann ein Wert
-  ausglesen oder gesetzt werden ohne dass dabei eine Metamethode ausgelöst wird.
+  p.
+    In bestimmten Fällen möchte man Metamethoden nicht auslösen (um z.B. Endlosschleifen zu verhindern). Mit den Funktionen <code>rawget(tab, key)</code> und <code>rawset(tab, key, value)</code> kann ein Wert
+    in einer Table ausglesen oder gesetzt werden ohne dass dabei eine Metamethode ausgelöst wird.
   
   div.executor
     label rawset, rawget

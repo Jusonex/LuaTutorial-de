@@ -2,7 +2,10 @@ extends content
 
 block body
   h1 Tricks mit der Debug-Bibliothek
-  p Die Debug Bibliothek ist nützlich, sollte jedoch auch mit Vorsicht betrachtet werden. Im Folgenden werden einzelne Funktionen beispielhaft vorgestellt.
+  p.
+    Die Debug Bibliothek ist nützlich, sollte jedoch auch mit Vorsicht betrachtet werden. 
+    Im Folgenden werden einzelne Funktionen beispielhaft vorgestellt.
+    Im Wesentlichen gibt die Debug Bibliothek Zugriffe auf Dinge, auf die man normalerweise (meist aus gutem Grund) nicht zugreifen kann.
   p Eine vollständige API Dokumentation ist hier zu finden: <a href="http://pgl.yoyo.org/luai/i/5.9+The+Debug+Library">http://pgl.yoyo.org/luai/i/5.9+The+Debug+Library</a>
 
   h2#functions Funktionen
@@ -25,6 +28,7 @@ block body
   h3 <code>debug.getlocal([coroutine,], level, local)</code>
   p.
     Mit <code>debug.getlocal</code> lassen sich lokale Variablen auf Basis eines Indizes auslesen. Das Verhalten des Levels ist wie bei debug.getinfo.
+    Diese Funktion kann z.B. genutzt werden, um lokale Variablen einer höheren Ebene auszulesen.
     
   div.executor
     label debug.getlocal
