@@ -43,8 +43,8 @@ block body
   p.
     Vordefiniert sind nur die beiden Iteratoren <code>pairs</code> und <code>ipairs</code>.
     <code>pairs</code> ist aus dem Grundlagentutorial bekannt und iteriert über eine beliebige Table.
-    <code>ipairs</code> hingegen iteriert nur über numerisch indiizerte Tables - sprich Arrays und war solange, bis der erste Wert im Array <i>nil</i> ist.
-    <i>ipairs</i> ist jedoch deutlich langsamer als <i>pairs</i> da es die Table vorher sortiert.
+    <code>ipairs</code> hingegen iteriert nur über numerisch indiizerte Tables - sprich Arrays und zwar solange, bis der erste Wert im Array <i>nil</i> ist.
+    <i>ipairs</i> ist jedoch deutlich langsamer als <i>pairs</i>, da es die Table vorher sortiert.
     Wenn die Reihenfolge also keine Rolle spielt oder aus irgendeinem anderen Grund <i>ipairs</i> gebraucht wird, sollte lieber <i>pairs</i> oder eine <i>numerische</i>
     for-Schleife eingesetzt werden.
   p Einige weitere Informationen und Beispiele findet man in der offiziellen Lua Dokumentation: <a href="http://www.lua.org/pil/7.html">http://www.lua.org/pil/7.html</a>

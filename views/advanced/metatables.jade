@@ -3,11 +3,11 @@ extends content
 block body
   h1 Metatables
   h2#motivation Motivation
-  p Da sind sie endlich - die Metatables. Metatables sind der Grund, warum Lua so einzigartig flexibel ist.
+  p Da sind sie endlich - die <i>Metatables</i>. Metatables sind der Grund, warum Lua so einzigartig flexibel ist.
   p.
     Metatables sind Tables, die zusätzliche Informationen zu Tables bereitstellen, die Tables <i>beschreiben</i> (als <i>Metainformation</i>).
     Zunächst ist die Metatable eine ganz normale Table, die alles enthalten kann. Da sie aber hinter einer Table <i>versteckt</i> ist, kann sie genutzt werden,
-    um Funktionalitäten nach dem Blackbox Prinzip zu vergergen.
+    um Funktionalitäten nach dem Blackbox Prinzip zu verbergen.
 
   h2#setmt Metatable setzen
   p Ein kurzes Beispiel soll verdeutlichen wie Metatables mit <code>setmetatable</code> gesetzt und <code>getmetatable</code> ausgelesen werden können.
@@ -89,7 +89,7 @@ block body
         td tab, key, value
         td Wird aufgerufen, wenn versucht wird einen neuen Wert <code>value</code> unter dem Schlüssel <code>key</code> in eine Table zu schreiben, der bisher nicht existierte
       tr
-        td __weak
+        td __mode
         td tab
         td Kontrolliert das Verhalten des Garbage Collectors
       tr

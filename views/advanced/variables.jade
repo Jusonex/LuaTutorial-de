@@ -78,7 +78,7 @@ block body
   h2#types Typen (Gültigkeitsbereiche)
   p.
     Bekannt sind bisher <i>lokale</i> und <i>globale</i> Variablen: Globale Variablen gelten global, lokale Variablen nur in ihrem Block.
-    Aber was ist, wenn Variablen außerhalb eines Blocks definiert sind?
+    Aber was ist, wenn Variablen außerhalb eines Blocks deklariert sind?
     
   div.executor
     label Upvalues
@@ -102,7 +102,7 @@ block body
       someFunction()
 
   p.
-    <i>a</i> ist als lokale Variable definiert, ist aber in der verschachtelten Funktion gültig. Nach der genauen Definition von lokalen Variablen ist das nicht möglich und a
+    <i>a</i> ist als lokale Variable deklariert, ist aber in der verschachtelten Funktion gültig. Nach der genauen Definition von lokalen Variablen ist das nicht möglich und a
     müsste <code>nil</code> sein.
   
   p.
@@ -111,7 +111,7 @@ block body
 
   p.
     Intern werden Upvalues in der Reihenfolge der Definition in Tabellen, die der Funktion zugeordnet werden, gespeichert. Das bedeutet aber gleichzeitig,
-    dass dabei - im Gegensatz zu globalen Variablen - nicht gesucht werden muss.
+    dass dabei - im Gegensatz zu globalen Variablen - nicht über den Namen gesucht werden muss.
     Das bedeutet, dass <strong>Upvalues deutlich schneller sind als globale Variablen</strong> und gleichzeitig einen eingeschränkten Gültigkeitsbereich aufweisen.
     
   div.alert.alert-success <strong>Goldene Regel:</strong> Globale Variablen sollten nur benutzt werden, wenn es wirklich nötig ist.

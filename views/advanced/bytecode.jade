@@ -13,7 +13,7 @@ block body
     C++ ist eine Compilersprache, die von einem <i>Compiler</i> in nativen Code <strong>kompiliert</strong> wird.
     <br/>
     Aber was ist <i>nativer Code</i>? Nativer Code ist Code, der von der Maschine, also der CPU direkt verstanden wird.
-    Dabei übersetzt der C++-Compiler den C++ Code in eine Sprache, die von der Maschine direkt verstanden wird. Unter Windows haben Dateien, die dabei entstehen die Endungen
+    Dabei übersetzt der C++-Compiler den C++ Code genau diese Sprache. Unter Windows haben Dateien, die dabei entstehen die Endungen
     <i>.exe, .dll oder .com</i> (aber Achtung: .exe/.dll Dateien, die von .NET erzeugt wurden, enthalten i.A. keinen nativen Code).
     
   p.
@@ -25,7 +25,7 @@ block body
   h2#bytecode Bytecode
   p.
     Nun wäre es eine sehr aufwendige Angelegenheit den Code Zeile für Zeile abzuarbeiten. Für uns Menschen ist das leicht, für eine Maschine sehr aufwendig.
-    Daher wird der geschriebene Lua/Java/.NET Code in ein Zwischenformat - dem <strong>Bytecode</strong> - umgewandelt, das von einer Maschine besser verstanden werden kann,
+    Daher wird der geschriebene Lua/Java/.NET Code in ein Zwischenformat - dem <strong>Bytecode</strong> - umgewandelt, der von einer Maschine besser verstanden werden kann,
     aber trotzdem noch durch die virtuelle Maschine interpretiert werden muss.
   p.
     Der Nachteil dieser Funktionsweise ist, dass solche Programme in dieser Form deutlich langsamer laufen als Code, der direkt auf der Maschine ausgeführt wird.
@@ -39,32 +39,31 @@ block body
     Genau das ist die Funktion von <strong>luac</strong>.
     
   h3 Verwendung
-  p Wenn Luac installiert wurde (<a href="https://github.com/rjpcomputing/luaforwindows">LuaForWindows</a>, bei Linux ist Luac i.A. in den Paketquellen), kann es über die Kommandozeile
-  wie folgt gesteuert werden.
+  p Wenn Luac installiert wurde (<a href="https://github.com/rjpcomputing/luaforwindows">LuaForWindows</a>, bei Linux ist Luac i.A. in den Paketquellen), kann es über die Kommandozeile wie folgt gesteuert werden.
 
   p Script "meinScript.lua" in "meinScript.luac" kompilieren
   <pre>luac -o meinScript.luac meinScript.lua</pre>
 
-  p Es lassen sich auch mehrere Lua Scripte gleichzeitig in eine Ausgabedatei kompiliert werden
+  p Es lassen sich auch mehrere Lua Scripte gleichzeitig in eine Ausgabedatei kompilieren
   <pre>luac -o meinScript.luac meinScript1.lua meinScript2.lua meinScript3.lua</pre>
   
   p.
     Die Ausgabe von Debugnachrichten/Fehlern funktioniert genau wie vorher, da in den Ausgabedateien standardmäßig sog. <i>Debug-Symbole</i> eingebettet sind, die dem erzeugten Bytecode
-    einzelne Zeilen im originalen Lua Code zuordnen. Abgeschaltet werden kann dieses Verhalten mit der Zusatzoption <code>-p</code>. Dies führt jedoch dazu,
+    einzelne Zeilen im originalen Lua Code zuordnen. Abgeschaltet werden kann dieses Verhalten mit der Zusatzoption <code>-s</code>. Dies führt jedoch dazu,
     dass Fehlermeldungen keine Zeilennummern und (lokalen) Variablennamen enthalten.
     
   h3 Was Luac nicht ist
   p.
     Manchmal wird behauptet, dass Luac den Lua Code <i>verschlüsselt</i>. Wie jetzt klar geworden sein sollte, ist dies nicht der Fall. Er wird lediglich in eine Form umgewandelt,
     die der Mensch bei erstem Hinsehen nicht versteht. Zudem würde eine Verschlüsselung bedeuten, dass die virtuelle Maschine (VM) den Code (ohne Schlüssel zum Entschlüsseln)
-    selbst nicht mehr interpretieren kann.
+    selbst nicht mehr interpretieren könnte.
   p.
     Daraus folgt weiterhin, dass Luac nur sehr bedingt genutzt werden kann, um Code vor Veränderung/Einsicht Dritter zu schützen. Da mit dem Herausschneiden der
     Debug-Symbole (Option <code>-s</code>) zwar (lokale) Variablennamen und Zeilennummern verschwunden sind, wird es schwieriger den Code zu verstehen,
     da aber der Lua-Bytecode im Gegensatz zu nativem Code sehr mächtige Operationen mitliefert, kann mit einem <strong>Decompiler</strong> oft eine Form erzeugt werden,
     die dem Originalcode nahe kommt.<br/>
     Mit manchen Tricks lassen sich Bugs von Decompilern ausnutzen, um sie zum Crashen zu bringen, dabei ist es jedoch nur eine Frage des Wissens des Dritten,
-    um den Code zu entziffern - denn die Maschine muss es das auch noch können.
+    um den Code zu entziffern - denn die Maschine muss das auch noch können.
 
   h2#assembly Assembler
   p.

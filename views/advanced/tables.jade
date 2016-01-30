@@ -13,6 +13,22 @@ block body
     Jedoch sollte man diese Funktionen mit Bedacht anwenden, da sie unter Umständen den Code sogar unübersichtlicher oder fehleranfälliger machen.
 
   p.
+    Ein Beispiel dafür ist das Buildtool <a href="https://premake.github.io/">premake</a> mit welchem Projektdateien für verschiedene IDEs und Plattformen generiert werden können.
+    Eine premake Konfigurationsdatei wird in Lua Code ausgedrückt und sieht z.B. so aus (Ausschnitt):
+    
+  pre.
+    solution "MyProject" 
+      configurations { "Debug", "Release", "Testing" }
+
+      location "Build"
+      defines { "_CRT_SECURE_NO_WARNINGS" }
+
+      flags { "C++14" }
+      platforms { "x64" }
+    
+  p Wer erkennt das schon spontan als gültigen Lua Code?
+
+  p.
     Das Ziel dieses Kapitels soll sein, einige Grundlagen zu klären, die für die nächsten Kapitel notwendig sein werden.
 
   h2#simplify Einige Syntaxvereinfachungen
@@ -21,7 +37,7 @@ block body
   h3 Eckige Klammern bei Strings weglassen
   p.
     Bei Initialiserung einer Table können die eckigen Klammern innerhalb der geschweiften Klammern der Tabledefinition weggelassen werden, wenn der Index ein String ist.
-    So sind folgende 2 Definitionen äquivalent
+    So sind folgende 2 Definitionen äquivalent:
     
   div.executor
     label Eckige Klammern weglassen
@@ -45,7 +61,7 @@ block body
     Dies gilt jedoch nur für die kurze Notation; in der Notation mit eckigen Klammern sind beliebige Strings erlaubt.
 
   h3 <code>.</code>-Operator
-  p Nun wäre es schade, wenn man die Notation ohne eckige Klammern auch bei Zuweisungen von Elementen nutzen könnte. Mit dem <code>.</code>-Operator wird dies möglich:
+  p Nun wäre es schade, wenn man die Notation ohne eckige Klammern nicht auch bei Zuweisungen von Elementen nutzen könnte. Mit dem <code>.</code>-Operator wird dies möglich:
     
   div.executor
     label <code>.</code>-Operator
@@ -112,8 +128,10 @@ block body
       end
 
   h2#internal Internas und Performance
+  div.alert.alert-info Der folgende Abschnitt beschreibt lediglich die interne Handhandbung von Tables. Für die Verwendung ist es bis auf die <i>Folgerung</i> ganz unten nicht notwendig diesen Abschnitt vollständig zu verstehen/zu kennen.
+  
   p Um Tables richtig einzusetzen und Performance beurteilen zu können, ist es notwendig zumindest ein grobes Verständnis zu haben, was unter der Haube passiert.
-    
+  
   p.
     Die interne Repräsentation von Arrays ist trivial: Bei reinen Arrays (die Lua nicht hat) wird einfach ein zusammenhängender Speicherblock bereitgestellt und mit Werten gefüllt.
     Dabei kann nur ein numerischer Index (eine Zahl im Bereich der Größe) genutzt werden, damit die genaue Position im Speicher errechnet werden kann.
