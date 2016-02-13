@@ -1,0 +1,65 @@
+extends content
+
+block body
+  h1 Ressourcen
+  p Ressourcen fassen mehrere Lua-Skripte zu einer Einheit/zu einem Paket zusammen, erlauben eine modulare Aufteilung und können einzeln gestartet/gestoppt werden.
+  
+  h2#meta meta.xml
+  p.
+    Jeder Ordner, der eine gültige Datei namens <kbd>meta.xml</kbd> enthält, ist eine Ressource. In der meta.xml werden zum einen allgemeine Informationen über das Paket
+    angegeben und zum anderen alle Skriptdateien und zusätzlichen Inhalten (Bilder, Musik, Soundeffekte) aufgelistet.
+  p In diesem Teil werden nur die wichtigsten Elemente beleuchtet. Eine vollständige Liste ist <a href="https://wiki.multitheftauto.com/wiki/Meta.xml">hier</a> zu finden.
+
+  h3 Beispiel
+  pre: code.xml.
+    &lt;meta&gt;
+      &lt;info name="my_first_resource" description="My first resource" author="me"/&gt;
+      
+      &lt;script src="server.lua" type="server"/&gt;
+      &lt;script src="client.lua" type="client"/&gt;
+      
+      &lt;file src="myimage.png"/&gt;
+      &lt;map src="mymap.map"/&gt;
+    &lt;/meta&gt;
+
+  h4 Zur Erklärung
+  p Jede <i>meta.xml</i> wird von <code>&lt;meta&gt;&lt;/meta&gt;</code> Tags eingeschlossen.
+  ul
+    li <strong>info:</strong> Tag für Informationen (die Attribute sollten selbsterklärend sein)
+    li <strong>script:</strong> Tag zur Auflistung der Skriptdateien
+      ul
+        li <strong>src:</strong> Pfad zur Skriptdatei (vom Pfad der <i>meta.xml</i> ausgehend)
+        li <strong>type:</strong> Typ des Skriptes (siehe nächster Abschnitt)
+    li <strong>file:</strong> Tag für Dateien (die auf den Client heruntergeladen werden sollen)
+    li <strong>map:</strong> Mapdateien
+  
+  p Aus Sicherheitsgründen ist es weiterhin nicht möglich auf Dateien außerhalb des Ressourcenordners zuzugreifen.
+
+  h2#serverclient Server vs Client
+  p In MTA wird zwischen 2 Skripttypen unterschieden. Serverseitige Skripte laufen auf dem Server und clientseitige Skripte werden vom Client ausgeführt.
+  p.
+    Diese Trennung ist sinnvoll, weil Client und Server grundsätzlich verschiedene Aufgaben haben. Der Server kümmert sich um die eigentliche Logik und Verwaltung der Spieler,
+    während der Client hauptsächlich die Aufgabe hat grafische Benutzeroberflächen (GUI) zu zeichnen. Auf Variablen, die in serverseitigen Skripten definiert wurden, kann dabei vom
+    Client aus nicht zugegriffen werden (und andersherum). Zur Kommunikation wird das später erklärte Eventsystem eingesetzt.
+
+  h2#startstop Starten/Stoppen und Verwaltung
+  p Der Befehl zum Starten einer Ressource ist <kbd>start RESOURCENAME</kbd>, Stoppen <kbd>stop RESOURCENNAME</kbd> und Neustarten <kbd>restart RESOURCENNAME</kbd> und kann sowohl auf der Serverkonsole als auch der Clientkonsole mit Adminrechten eingegeben werden.
+  p Wenn eine neue Ressource nach dem Starten des Servers hinzugefügt wurde, ist diese dem Server noch nicht bekannt. Um sie in den Index der bekannten Ressourcen aufzunehmen genügt die Eingabe des Befehls <kbd>refresh</kbd>.
+  p Bei der Änderung einer Skriptdatei reicht es zum Übernehmen der Änderungen die Ressource neuzustarten.
+
+  h2#exercise Übung
+  p Erstelle eine <i>meta.xml</i> die folgende Eigenschaften erfüllt:
+  ul
+    li Das clientseitige Skript namens <kbd>account_gui.lua</kbd> soll eingebunden werden.
+    li Das serverseitige Skript namens <kbd>account_system.lua</kbd> soll eingebunden werden.
+    li Zusätzlich muss das Profilbild unter den Namen <kbd>profile.png</kbd> eingebunden werden.
+    li Weiterhin wichtig ist die Mapdatei für den Spawn des Spielers namens <kbd>initial_spawn.map</kbd>
+
+  div.solution: div.content: pre: code.xml.
+    &lt;meta&gt;
+      &lt;script src="account_gui.lua" type="client"/&gt;
+      &lt;script src="account_system.lua" type="server"/&gt;
+      
+      &lt;file src="profile.png"/&gt;
+      &lt;map src="initial_map.map"/&gt;
+    &lt;/meta&gt;
