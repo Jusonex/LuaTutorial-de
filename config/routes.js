@@ -65,4 +65,9 @@ module.exports.routes = {
   '/advanced/coroutine': {view: 'advanced/coroutine'},
   '/advanced/bytecode': {view: 'advanced/bytecode'},
   '/advanced/debug': {view: 'advanced/debug'},
+
+  '/mtasa_basics': {view: 'mtasa_basics/introduction'},
+  '/mtasa_basics/introduction': {view: 'mtasa_basics/introduction'},
+  '/mtasa_basics/environment': {view: 'mtasa_basics/environment'},
+
 };

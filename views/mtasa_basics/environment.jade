@@ -1,0 +1,68 @@
+extends content
+
+block body
+  h1 Einrichtung der Umgebung
+  p In diesem Kapitel soll alles Nötige zum Entwickeln von MTA Skripten/Spielmodi vorbereitet werden.
+  
+  h3#installation Installation
+  h4 Windows
+  p.
+    Zunächst muss MTA selbst installiert werden. Heruntergeladen werden kann es auf <a href="https://mtasa.com/">mtasa.com</a>.
+    Benötigt wird als Voraussetzung GTA:SA (<a href="https://wiki.multitheftauto.com/wiki/Where_to_buy_GTASA">Liste mit Shops</a>).
+  p Das heruntergeladene Setupprogramm sollte selbsterklärend sein und kann einfach durchgeklickt werden.
+  
+  h4 Linux
+  p Der Server ist ebenfalls für Linux verfügbar und kann auf <a href="https://linux.mtasa.com/">linux.mtasa.com</a> heruntergeladen werden.
+
+  h3#directorylayout Ordnerstruktur
+  p.
+    Der MTA Programmordner ist im Regelfall unter <kbd>C:\Program files (x86)\MTA San Andreas 1.5\</kbd>,
+    da es in diesem Tutorial aber nur um die Ressourcenentwicklung geht, ist nur der Unterordner <kbd>server</kbd> von Bedeutung,
+    welcher wie folgt aufgebaut ist (nur relevante Ordner/Dateien sind gelistet):
+    
+  ul
+    li <kbd>MTA Server.exe</kbd>: Startet den Server
+    li <kbd>mods\deathmatch</kbd>: Ordner mit eigentlichen Serverdateien
+      ul
+        li <kbd>backups</kbd>: Enthält Backups von Configs und (integrierten) Datenbanken
+        li <kbd>databases</kbd>: Datenbanken (internes Accountsystem)
+        li <kbd>logs</kbd>: Server Logdateien
+          ul
+            li <kbd>scripts.log</kbd>: (Eigene) Meldungen der Skripte
+            li <kbd>server.log</kbd>: Gesamter Log der Serverkonsole
+            li <kbd>server_auth.log</kbd>: Logins
+        li <kbd>resource-cache</kbd>: Enthält entpackte Ressourcen (falls sie als ZIP-Archiv vorliegen) und Clientdateien für den Betrieb eines externen Webservers (interne Verwendung)
+        li <kbd>resources</kbd>: Enthält alle Ressourcen (Skripte). Dies ist der für dieses Tutorial interessante Ordner
+        li <kbd>acl.xml</kbd>: Enthält Benutzerrechte (und Ressourcenrechte)
+        li <kbd>mtaserver.conf</kbd> Konfigurationsdatei des Servers (Einstellung des Namens, verfügbare Slots, ...)
+
+  h3#adminaccess Einrichtung eines Adminaccounts
+  p Damit Ressourcen/Skripte auch über den Client/Ingame gestartet werden können, bedarf es der Einrichtung eines Accounts mit Administratorrechten.
+  p.
+    Dazu wird die <kbd>acl.xml</kbd> geöffnet und direkt unter <code>&lt;group name="Admin"&gt;</code> folgende Zeile eingefügt: <code>&lt;object name="user.MYACCOUNT"&gt;&lt;/object&gt;</code>,
+    wobei <i>MYACCOUNT</i> durch einen beliebigen Accountnamen ersetzt wird (in diesem Schritt darf der Server <strong>nicht</strong> laufen).
+  p.
+    Im nächsten Schritt wird der MTA Server (<kbd>MTA server.exe</kbd>) im Ordner <kbd>C:\Program Files (x86)\MTA San Andreas 1.5\server\</kbd> gestartet. Daraufhin sollte sich eine
+    Konsole öffnen, die in etwa so aussieht:
+  img(src="/images/mta_basics/server.jpg")
+  
+  p In diese Konsole wird nun der Befehl <kbd>addaccount MYACCOUNT MYPASSWORD</kbd> eingegeben, wobei <i>MYACCOUNT</i> durch den zuvor gewählten Namen und <i>MYPASSWORD</i> durch ein Passwort zu ersetzen sind.
+  p.
+    Im Spiel kann sich anschließend über den <kbd>login MYACCOUNT MYPASSWORD</kbd> Befehl eingeloggt werden. Das funktioniert entweder über die Konsole, die sich durch Drücken von F8
+    öffnen lässt oder über den Chat, wobei dort ein <kbd>/</kbd> (Slash) vorgestellt werden muss, damit die Nachricht als Befehl interpretiert wird.
+
+  h3#editor Editor
+  p.
+    Zu jeder ordentlichen Umgebung zum Entwickeln gehört ein passender Editor und/oder eine passende Entwicklungsumgebung (IDE). Da Lua eine leichte, interpretierte Skriptsprache ist
+    und Autovervollständigung daher durch <i>dynamische Typisierung</i> nur eingeschränkt funktioniert, ist ein Editor im Allgemeinen völlig ausreichend.
+  
+  h4 Notepad++
+  p <a href="https://notepad-plus-plus.org/">Notepad++</a> ist ein einfacher und schneller Editor für Windows, der sowohl Lua kennt als auch MTA Funktionen in die Autovervollständigung einbeziehen kann. (TODO: Link folgt)
+
+  h4 Atom
+  p <a href="https://atom.io">Atom</a> ist ein sehr moderner Editor, der sehr leicht mit eine riesigen Anzahl an <a href="https://atom.io/packages">Plugins</a> erweitert werden kann.
+  p Die für das MTA Scripting notwendigen Pakete sind:
+  ul
+    li: <a href="https://atom.io/packages/language-lua">language-lua</a>: Lua Syntaxhighlighting
+    li: <a href="https://atom.io/packages/language-mta-lua">language-mta-lua</a>: MTA Funktionsdatenbank
+    li: <a href="https://atom.io/packages/keyboard-localization">keyboard-localization</a>: Behebt Probleme mit dem deutschen Tastaturlayout

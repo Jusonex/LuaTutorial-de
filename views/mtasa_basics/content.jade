@@ -1,0 +1,24 @@
+extends ../layout
+
+block navigation
+  ul.nav.nav-pills.nav-stacked
+    li: a(href="/mtasa_basics/introduction") Einleitung
+      if (req.path == "/mtasa_basics/introduction")
+        ul
+          li: a(href="/mtasa_basics/introduction#whatismta") Was ist MTA:SA?
+          li: a(href="/mtasa_basics/introduction#audience") Zielgruppe
+          li: a(href="/mtasa_basics/introduction#sources") Quellen
+          
+    li: a(href="/mtasa_basics/environment") Einrichtung des Umgebung
+      if (req.path == "/mtasa_basics/environment")
+        ul
+          li: a(href="/mtasa_basics/environment#installation") Installation
+          li: a(href="/mtasa_basics/environment#directorylayout") Ordnerstruktur
+          li: a(href="/mtasa_basics/environment#editor") Editor
+
+    li: a(href="/mtasa_basics/resources") Ressourcen
+      if (req.path == "/mtasa_basics/resources")
+        ul
+          li: a(href="/mtasa_basics/resources#meta") meta.xml
+          li: a(href="/mtasa_basics/resources#serverclient") Server vs Client
+          li: a(href="/mtasa_basics/resources#exercise") Übung
