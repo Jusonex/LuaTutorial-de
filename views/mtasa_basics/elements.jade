@@ -1,0 +1,29 @@
+extends content
+
+block body
+  h1 Elemente
+  p Alles in MTA besteht aus Elementen: Ein Element kann z.B. ein Spieler, ein Mapobjekt oder auch ein Marker sein.
+  p Eine vollständige Liste ist <a href="https://wiki.multitheftauto.com/wiki/Element">hier</a> zu finden.
+
+  h2 Was ist ein Element technisch?
+  p Ein Element ist in Lua eine Variable vom Typ <i>Userdata</i> und identifiziert ein Element (ist also vereinfacht gesehen mit einer ID vergleichbar).
+  p.
+    In MTA gibt es dabei für jeden Elementtyp eine Reihe von Funktionen. Möchte man bspw. ein Mapobjekt erstellen, verwendet man die Funktion <code>createObject</code>
+    und <code>setElementPosition</code>, um die Position nachträglich zu ändern.
+    
+  h2 Woher bekomme ich Informationen über Elemente und Funktionen?
+  p.
+    Das Zentrum für Informationen (Dokumentation) ist in MTA das Wiki, welches unter <a href="https://wiki.multitheftauto.com/">wiki.multitheftauto.com</a> erreichbar ist.
+    Der meiste Inhalt des Wikis ist englisch. Es existiert zwar in Teilen auch eine Übersetzung, die ist jedoch unvollständig und an vielen Stellen nicht aktuell, daher empfielt es sich
+    die englischsprachige Version zu benutzen.
+
+  p.
+    Wie im vorherigen Kapitel erklärt wurde, wird zwischen clientseitigen und serverseitigen Skripten unterschieden. Dies wird auch im Wiki sofort sichtbar, sodass links in der Navigation
+    sowohl ein Menüpunkt <a href="https://wiki.multitheftauto.com/wiki/Client_Scripting_Functions">Client Functions</a> als auch
+    <a href="https://wiki.multitheftauto.com/wiki/Server_Scripting_Functions">Server Functions</a> zu finden ist.
+
+  img(src="/images/mta_basics/wiki.jpg", width="100%")
+
+  br
+  br
+  p Sucht man also nach einer Funktion zum Erstellen von Objekten, sucht man in der Liste der Serverfunktionen und erhält <a href="https://wiki.multitheftauto.com/wiki/CreateObject">createObject</a>

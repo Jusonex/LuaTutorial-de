@@ -70,5 +70,6 @@ module.exports.routes = {
   '/mtasa_basics/introduction': {view: 'mtasa_basics/introduction'},
   '/mtasa_basics/environment': {view: 'mtasa_basics/environment'},
   '/mtasa_basics/resources': {view: 'mtasa_basics/resources'},
+  '/mtasa_basics/elements': {view: 'mtasa_basics/elements'},
 
 };
